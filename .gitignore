@@ -1,2 +1,4 @@
-tmp
-vendor
+/vendor
+/lib
+/dict
+/tmp
