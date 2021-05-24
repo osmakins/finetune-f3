@@ -1,0 +1,13 @@
+{
+  "name": "rest/php",
+  "description": "",
+  "require": {
+    "devcoder-xyz/php-dotenv": "^1.0.2",
+    "bcosca/fatfree-core": "^3.7"
+  },
+  "autoload": {
+    "psr-4": {
+      "Src\\": "src/"
+    }
+  }
+}
