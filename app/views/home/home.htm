@@ -1,0 +1,15 @@
+<h1>Say hello to home</h1>
+
+<repeat group="{{ @users }}" key="{{ @index }}" value="{{ @row }}">
+  <check if="{{ @row.username == 'matthew' }}">
+    <true>
+      <h1>Hello {{ @row.username }}</h1>
+    </true>
+    <false>
+      <h1>Hi {{ @row.username }}</h1>
+    </false>
+  </check>
+
+  <input type="text" value="{{ @row.email }}" />
+  <br />
+</repeat>

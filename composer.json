@@ -1,8 +1,13 @@
 {
-  "name": "rest/php",
-  "description": "",
+  "name": "finetune/php",
+  "authors": [
+    {
+      "name": "M.O Akindayo",
+      "email": "xxx@email.com"
+    }
+  ],
+  "description": "Experiment with the fat free php framework",
   "require": {
-    "devcoder-xyz/php-dotenv": "^1.0.2",
     "bcosca/fatfree-core": "^3.7"
   },
   "autoload": {

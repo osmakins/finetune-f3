@@ -1,0 +1,17 @@
+<?php
+
+class homeController extends homeModel{
+
+	public function __construct($f3){
+		parent::__construct($f3);
+	}
+
+	public function home(){
+		$users = $this->getUsers();
+		$this->f3->set('users', $users);
+		$this->f3->set('content', 'home/home.htm');
+		echo \Template::instance()->render('template.htm');
+	}
+
+	
+}
