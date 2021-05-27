@@ -6,10 +6,10 @@ class homeModel extends database{
     parent::__construct($f3);
   }
 
-  public function getUsers(){
+  public function getPosts(){
     $this->setDatabase();
     $db = $this->getDatabase();
-    $query = $db->exec('SELECT username, email FROM users');
+    $query = $db->exec('SELECT * FROM posts');
     return $query;
   }
 }

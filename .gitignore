@@ -2,4 +2,4 @@
 /lib
 /dict
 /tmp
-*.env
+.env

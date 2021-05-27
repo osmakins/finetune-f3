@@ -7,11 +7,9 @@ class homeController extends homeModel{
 	}
 
 	public function home(){
-		$users = $this->getUsers();
+		$users = $this->getPosts();
 		$this->f3->set('users', $users);
 		$this->f3->set('content', 'home/home.htm');
-		echo \Template::instance()->render('template.htm');
+		echo \Template::instance()->render('layout.htm');
 	}
-
-	
 }
