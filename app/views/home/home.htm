@@ -1,15 +1,11 @@
-<h1>Say hello to home</h1>
-
-<repeat group="{{ @users }}" key="{{ @index }}" value="{{ @row }}">
-  <check if="{{ @row.user_id == '1' }}">
-    <true>
-      <h1>Hello {{ @row.username }}</h1>
-    </true>
-    <false>
-      <h1>Hi {{ @row.username }}</h1>
-    </false>
-  </check>
-  <input type="text" value="{{ @row.title }}" /><br />
-  <textarea type="text" value="{{ @row.message }}" />
-  <br />
-</repeat>
+<section class="py-5 text-center container">
+  <div class="row py-lg-5">
+    <div class="col-lg-6 col-md-8 mx-auto">
+      <h1 class="fw-light">FineTune F3</h1>
+      <p class="lead text-muted">Suspendisse scelerisque, felis tristique posuere congue, lorem mauris egestas erat, vulputate venenatis est augue sed lorem. Nunc lacinia arcu dui, quis faucibus felis euismod sed. Proin sit amet dapibus ipsum.</p>
+      <p>
+        <a href="/login" class="btn btn-primary my-2">Click here to login</a>
+      </p>
+    </div>
+  </div>
+</section>

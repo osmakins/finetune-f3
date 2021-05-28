@@ -1,28 +1,85 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="en" class="h-100">
   <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="" />
-    <meta name="author" content="" />
-    <link rel="icon" href="../../favicon.ico" />
-
-    <title>finetune-f3</title>
-
-    <!-- Bootstrap style CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
-
-    <!-- Custom styles for this template -->
-    <link href="/app/views/css/main.css" rel="stylesheet" />
-  </head>
-
-  <body class="buffer-pinterest">
-    <include href="{{ @content }}" />
-  </body>
-  <script src="/app/views/js/script.js" type="application/javascript"></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <title>finetune-f3</title> 
+    <!-- Bootstrap core CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <!-- Custom styles for the app -->
+  <link href="{{@BASE}}/app/views/css/main.css" rel="stylesheet">
+</head>
+<body class="d-flex flex-column h-100 col-xs-auto">
+  <header>
+    <!--navbar switch -->
+    <check if="{{@SESSION.user}}">
+      <true>
+       <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="/dashboard"><span class="h3">Hi, {{@SESSION.user}}</span></a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav me-auto mb-2 mb-md-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/dashboard">Dashboard</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/staff">Staff</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/projects">Projects</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/tasks">Tasks</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/analytics">Analytics</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/logout">Logout</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </true>
+    <false>
+      <nav class="navbar navbar-expand-md navbar-light bg-light">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="/">finetune-f3</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav me-auto mb-2 mb-md-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/login">Login</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </false>
+  </check>
+  </header>
+  <main>
+    <include href="{{@content}}" />
+  </main>
+  <!--Sticky footer-->
+  <footer class="footer mt-auto py-3 bg-light">
+    <div class="container-fluid text-center">
+      <span class="text-muted">Copyrights finetune-f3 &copy;  2021.</span>
+    </div>
+  </footer>
+  <script src="{{@BASE}}/app/views/js/script.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" 
     integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" 
-    crossorigin="anonymous">
-  </script>
+    crossorigin="anonymous"></script>
+  </body>
 </html>

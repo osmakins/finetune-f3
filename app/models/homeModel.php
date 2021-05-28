@@ -9,7 +9,7 @@ class homeModel extends database{
   public function getPosts(){
     $this->setDatabase();
     $db = $this->getDatabase();
-    $query = $db->exec('SELECT * FROM posts');
+    $query = $db->exec('SELECT * FROM tasks');
     return $query;
   }
 }

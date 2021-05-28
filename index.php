@@ -5,6 +5,6 @@
   
   $f3->config('config.ini');
   $f3->config('routes.ini');
-
+  $f3->clear('CACHE');
   $f3->run();
 ?>

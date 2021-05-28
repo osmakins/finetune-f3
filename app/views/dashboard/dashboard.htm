@@ -1,1 +1,34 @@
-Hello from dashboard Mr. {{ @SESSION.user }}!
+<div class="container-fluid">
+  <div class="row mt-3">
+      <div class="col-lg-3 col-md-3">
+          <div class="card card-border">
+              <div class="card-body">
+                  <h4 class="card-title">15 <small class="text-muted">Staff Members</small></h4>
+              </div>
+              <div class="list-group list-group-flush">
+                  <a href="/staff" class="list-group-item list-group-item-primary">View all</a>
+              </div>
+          </div>
+      </div>
+      <div class="col-lg-3 col-md-3">
+        <div class="card card-border">
+            <div class="card-body">
+                <h4 class="card-title">5 <small class="text-muted">Projects</small></h4>
+            </div>
+            <div class="list-group list-group-flush">
+                <a href="/projects" class="list-group-item list-group-item-primary">View all</a>
+            </div>
+        </div>
+    </div>
+      <div class="col-lg-3 col-md-3">
+          <div class="card card-border">
+              <div class="card-body">
+                  <h4 class="card-title">25 <small class="text-muted">Tasks</small></h4>
+              </div>
+              <div class="list-group list-group-flush">
+                  <a href="/tasks" class="list-group-item list-group-item-primary">View all</a>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>

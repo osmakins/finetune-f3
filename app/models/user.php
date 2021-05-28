@@ -11,6 +11,7 @@ class user extends database {
     $this->setUser($name);
   }
 
+
   private function setUser($name){
     $this->setDatabase();
     $query = $this->getDatabase()->exec('SELECT * FROM users WHERE username = :name', [':name' => $name]);
