@@ -3,3 +3,4 @@
 /dict
 /tmp
 *.env
+/logs

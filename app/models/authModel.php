@@ -1,6 +1,6 @@
 <?php
 
-class userModel extends database
+class authModel extends database
 {
     public function __construct($db) 
     {
