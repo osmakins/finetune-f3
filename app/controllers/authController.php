@@ -25,12 +25,14 @@ class authController extends authModel{
         if($this->getCurrentUser($username) === FALSE) {
             $this->f3->reroute('/login');
         }
+
         $user = new user($this->f3, $username);
         if(password_verify($password, $user->password)) {
             $this->f3->logger->write( "LOG IN: ".$this->f3->get('POST.username')." login success (ip: " .$ip .")",'r'  );
             $this->f3->set('SESSION.user', $user->username);
             $this->f3->reroute('/dashboard');
-        } else {
+        }
+        else {
             $this->f3->logger->write( "LOG IN: ".$this->f3->get('POST.username')." login failed (ip: " .$ip .")",'r'  );
             $this->f3->reroute('/login');
         }

@@ -3,6 +3,8 @@
 
   $f3 = \Base::instance();
   
+  $f3->LANGUAGE = $f3->get('sitelang');
+
   $f3->config('config.ini');
   $f3->config('routes.ini');
 

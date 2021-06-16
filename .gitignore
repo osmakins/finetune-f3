@@ -1,6 +1,5 @@
 /vendor
 /lib
-/dict
 /tmp
 *.env
 /logs
