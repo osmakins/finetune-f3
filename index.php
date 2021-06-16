@@ -5,8 +5,8 @@
   
   $f3->LANGUAGE = $f3->get('sitelang');
 
-  $f3->config('config.ini');
-  $f3->config('routes.ini');
+  $f3->config('config/config.ini');
+  $f3->config('config/routes.ini');
 
   $logger = new Log('logs/'.date("Ymd").'.log');
   $f3->logger = $logger;
