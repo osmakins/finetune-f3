@@ -2,6 +2,14 @@
   <form method="POST" action="/authenticate">
     <img class="mb-4" src="/app/views/images/logo.png" alt="" width="72" height="72">
     <p class="h3 mb-3 fw-normal">{{ @i10en_login }}</p>
+    <check if="{{isset(@message) }}">
+      <true>
+      <div class="alert alert-danger">
+        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+        <span class="sr-only">{{@message | raw}}</span>
+      </div>
+    </true>
+    </check>
     <div class="form-floating">
       <input type="text" name="username" class="form-control" id="floatingInput" placeholder="{{ @i10en_username }}" required autofocus>
       <label for="floatingInput">{{ @i10en_username }}</label>

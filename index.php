@@ -8,8 +8,7 @@
   $f3->config('config/config.ini');
   $f3->config('config/routes.ini');
 
-  $logger = new Log('logs/'.date("Ymd").'.log');
-  $f3->logger = $logger;
+  $f3->logger = new Log('logs/'.date("Ymd").'.log');
   $f3->clear('CACHE');
   $f3->run();
 ?>
