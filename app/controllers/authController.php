@@ -10,7 +10,7 @@ class authController extends authModel{
 	}
 
     public function login(){
-        $this->f3->set('content', 'login/login.htm');
+        $this->f3->set('content', 'user/login.htm');
     }
 
     public function authenticate(){
@@ -40,7 +40,7 @@ class authController extends authModel{
             $this->f3->logger->write("LOG IN: ".$this->f3->get('POST.username')." login failed (ip: " .$ip .")",'r'  );
             //$this->f3->reroute('/login');
             $this->f3->set('message', $this->f3->get('i10en_wrong_login'));
-            $this->f3->set('content', 'login/login.htm');
+            $this->f3->set('content', 'user/login.htm');
         }
     }
     
