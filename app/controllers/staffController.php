@@ -1,6 +1,6 @@
 <?php
 
-class dashboardController extends dashboardModel{
+class staffController extends staffModel{
   public $f3;
 
   public function __construct($f3){
@@ -13,8 +13,8 @@ class dashboardController extends dashboardModel{
   function afterroute() {
 		echo \Template::instance()->render('layout.htm');
 	}
-
-  public function dashboard(){
-    $this->f3->set('content', 'pages/dashboard.htm');
+  
+  public function staff(){
+    $this->f3->set('content', 'pages/staff.htm');
   }
 }
