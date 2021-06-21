@@ -40,29 +40,25 @@ class projectModel extends database{
 
   public function addProject($data){
 
-    //$data[] = $this->sanitize_input($unsanitizeddata, $this->fields_data);
+    if($this->f3->get("SESSION.user") === null){
+      $this->f3->reroute("/login");
+    }
 
     $data[] = $this->getCurrentUserId();
-    // $data[] = $this->getCurrentdate();
-		// $data[] = $this->getCurrentdate();
-
-   // $values = implode(', ', $data);
+    $data[] = $this->getCurrentdate();
+		$data[] = $this->getCurrentdate();
 
    $values = "";
 
-   foreach($data as $d){
-     $values.= (end($data) === $d)?"'$d'" : "'$d', ";
+   for($i = 0; $i < count($data); $i++){
+     $values.= "'$data[$i]'".(($i === (count($data)-1)) ? "" : ", ");
    }
-  
-  // var_dump($values);
-
-  // echo "<pre>".print_r($data, true);
-
 
     $this->setDatabase();
     try{
-      $query = $this->getDatabase()->exec("INSERT INTO projects (`title`, `description`, `client`, `timetocomplete`, `user_id`)
-      VALUES($values)");
+      $query = $this->getDatabase()->exec("INSERT INTO 
+        projects (`title`, `description`, `client`, `timetocomplete`, `user_id`, `created_at`, `updated_at`)
+        VALUES($values)");
     }
     catch (\Exception $e){
       return false;
@@ -70,11 +66,11 @@ class projectModel extends database{
     return true;
   }
 
-  public function updateProject($id){
+  public function editProject($id){
     
   }
 
-  public function deleteProject($id){
+  public function removeProject($id){
     
   }
 }

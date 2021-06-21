@@ -8,7 +8,6 @@ class projectController extends projectModel{
     $this->f3->set('content', 'pages/projects.htm');
   }
 
-
   public function createProject() {
     $data = [$this->f3->get('POST.title'),
     $this->f3->get('POST.description'),
@@ -17,5 +16,17 @@ class projectController extends projectModel{
 
     $this->addProject($data);
     $this->f3->set('content', 'pages/projects.htm');
+  }
+
+  public function readProject(){
+    
+  }
+
+  public function updateProject(){
+
+  }
+
+  public function deleteProject(){
+    
   }
 }
