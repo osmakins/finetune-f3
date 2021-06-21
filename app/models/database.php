@@ -8,6 +8,10 @@ class database{
     $this->f3 = $f3;
   }
 
+  public function getCurrentdate(){
+    return date('Y-m-d H:i:s');
+  }
+  
   public function getDatabase(){
     return $this->db;
   }
