@@ -34,8 +34,13 @@ class projectModel extends database{
     $this->updated_at = $query[0]['updated_at'];
   }
 
+ 
+
   public function getProjects(){
-    
+    $this->setDatabase();
+    $db = $this->getDatabase();
+    $query = $db->exec('SELECT * FROM projects');
+    return $query;
   }
 
   public function addProject($data){
@@ -48,7 +53,7 @@ class projectModel extends database{
     $data[] = $this->getCurrentdate();
 		$data[] = $this->getCurrentdate();
 
-   $values = "";
+    $values = "";
 
    for($i = 0; $i < count($data); $i++){
      $values.= "'$data[$i]'".(($i === (count($data)-1)) ? "" : ", ");

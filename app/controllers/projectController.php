@@ -18,8 +18,10 @@ class projectController extends projectModel{
     $this->f3->set('content', 'pages/projects.htm');
   }
 
-  public function readProject(){
-    
+  public function readProjects(){
+    $projects = $this->getProjects();
+		$this->f3->set('projects', $projects);
+    $this->f3->set('content', 'pages/projects.htm');
   }
 
   public function updateProject(){
@@ -27,6 +29,6 @@ class projectController extends projectModel{
   }
 
   public function deleteProject(){
-    
+
   }
 }
