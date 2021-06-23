@@ -7,7 +7,7 @@ class database{
 
   public function __construct($f3){
     $this->f3 = $f3;
-    //$this->crypteri = new twoWayEncrypt($f3->HASH_KEY);
+    $this->crypteri = new twoWayEncrypt($f3->HASH_KEY);
   }
 
   public function getCurrentdate(){

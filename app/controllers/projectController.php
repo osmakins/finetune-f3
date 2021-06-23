@@ -62,8 +62,8 @@ class projectController extends projectModel{
   }
 
   public function getProjectById(){
-    $id = $this->f3->get('POST.id');
-    // $id = $this->crypteri->decrypt($hid);
+    $hid = $this->f3->get('POST.id');
+    $id = $this->crypteri->decrypt($hid);
     $projectArray = $this->getProject($id);
     $this->f3->mset($projectArray);
     echo \Template::instance()->render('pages/page_parts/project_modal.htm');

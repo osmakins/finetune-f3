@@ -41,9 +41,9 @@ class projectModel extends database{
     $this->setDatabase();
     $db = $this->getDatabase();
     $query = $db->exec('SELECT * FROM projects');
-    // foreach($query as $key => $value){
-    //   $query[$key]['hid'] = $this->crypteri->encrypt($value['id']);
-    // }
+    foreach($query as $key => $value){
+      $query[$key]['hid'] = $this->crypteri->encrypt($value['id']);
+    }
     return $query;
   }
 
