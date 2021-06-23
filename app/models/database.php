@@ -2,10 +2,12 @@
 
 class database{
   public $f3;
+  public $crypteri;
   private $db;
 
   public function __construct($f3){
     $this->f3 = $f3;
+    //$this->crypteri = new twoWayEncrypt($f3->HASH_KEY);
   }
 
   public function getCurrentdate(){

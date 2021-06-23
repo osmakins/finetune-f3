@@ -1,7 +1,7 @@
 <?php
 
 class projectModel extends database{
-    public function __construct($f3, $name){
+    public function __construct($f3){
     parent::__construct($f3);
   }
 
@@ -25,13 +25,14 @@ class projectModel extends database{
   public function getProject($id){
     $this->setDatabase();
     $query = $this->getDatabase()->exec('SELECT * FROM projects WHERE id = :id', [':id' => $id]);
-    $this->id = $query[0]['id'];
-    $this->title = $query[0]['title'];
-    $this->description = $query[0]['description'];
-    $this->timetocomplete = $query[0]['timetocomplete'];
-    $this->user_id = $query[0]['user_id'];
-    $this->created_at = $query[0]['created_at'];
-    $this->updated_at = $query[0]['updated_at'];
+    return $query[0];
+    // $this->id = $query[0]['id'];
+    // $this->title = $query[0]['title'];
+    // $this->description = $query[0]['description'];
+    // $this->timetocomplete = $query[0]['timetocomplete'];
+    // $this->user_id = $query[0]['user_id'];
+    // $this->created_at = $query[0]['created_at'];
+    // $this->updated_at = $query[0]['updated_at'];
   }
 
  
@@ -40,35 +41,22 @@ class projectModel extends database{
     $this->setDatabase();
     $db = $this->getDatabase();
     $query = $db->exec('SELECT * FROM projects');
+    // foreach($query as $key => $value){
+    //   $query[$key]['hid'] = $this->crypteri->encrypt($value['id']);
+    // }
     return $query;
   }
 
-  public function addProject($data){
+  public function addProject($dataPack){
 
     if($this->f3->get("SESSION.user") === null){
       $this->f3->reroute("/login");
     }
-
-    $data[] = $this->getCurrentUserId();
-    $data[] = $this->getCurrentdate();
-		$data[] = $this->getCurrentdate();
-
-    $values = "";
-
-   for($i = 0; $i < count($data); $i++){
-     $values.= "'$data[$i]'".(($i === (count($data)-1)) ? "" : ", ");
-   }
-
     $this->setDatabase();
-    try{
-      $query = $this->getDatabase()->exec("INSERT INTO 
-        projects (`title`, `description`, `client`, `timetocomplete`, `user_id`, `created_at`, `updated_at`)
-        VALUES($values)");
-    }
-    catch (\Exception $e){
-      return false;
-    }
-    return true;
+    $count = $this->getDatabase()->exec('INSERT INTO projects (title, description, client, timetocomplete, user_id, created_at) VALUES (:title, :description, :client, :timetocomplete, :user_id, :created_at)', $dataPack);
+    return ($count ? true: false);
+
+
   }
 
   public function editProject($id){
