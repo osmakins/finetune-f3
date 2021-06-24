@@ -15,11 +15,12 @@ class projectController extends projectModel{
   }
 
   public function projects(){
-    $this->f3->set('content', 'pages/projects.htm');
+    $this->f3->set('content', 'pages/projects/project.htm');
     echo \Template::instance()->render('layout.htm');
   }
 
   public function createProject() {
+    echo \Template::instance()->render('pages/projects/project_add.htm');
     $dataPack = [  
       ':title' => $this->f3->get('POST.title'),
       ':description' => $this->f3->get('POST.description'),
@@ -43,29 +44,41 @@ class projectController extends projectModel{
       print_r('</pre>');
     }
     $this->f3->reroute('/projects');
-
   }
 
   public function readProjects(){
     $projects = $this->getProjects();
 		$this->f3->set('projects', $projects);
-    $this->f3->set('content', 'pages/projects.htm');
+    $this->f3->set('content', 'pages/projects/project.htm');
     echo \Template::instance()->render('layout.htm');
   }
 
   public function updateProject(){
+    $hid = $this->f3->get('POST.id');
+    $id = $this->crypteri->decrypt($hid);
+    $projectArray = $this->editProject($id);
+    $this->f3->mset($projectArray);
+    echo \Template::instance()->render('pages/projects/project_edit.htm');
 
+    $dataPack = [  
+      ':title' => $this->f3->get('POST.title'),
+      ':description' => $this->f3->get('POST.description'),
+      ':client' => $this->f3->get('POST.client'),
+      ':timetocomplete' => $this->f3->get('POST.timetocomplete'),
+      ':user_id' => $this->f3->get('SESSION.user_id'),
+      ':updated_at' => $this->getCurrentdate()
+    ];
   }
 
   public function deleteProject(){
 
   }
 
-  public function getProjectById(){
+  public function readProjectById(){
     $hid = $this->f3->get('POST.id');
     $id = $this->crypteri->decrypt($hid);
-    $projectArray = $this->getProject($id);
+    $projectArray = $this->getProjectById($id);
     $this->f3->mset($projectArray);
-    echo \Template::instance()->render('pages/page_parts/project_modal.htm');
+    echo \Template::instance()->render('pages/projects/project_details.htm');
   }
 }

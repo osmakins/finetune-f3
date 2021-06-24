@@ -132,6 +132,16 @@
                 openModalWindow(data, 'hello top', 'hello bottom')
               })
           })
+
+          $('.edit-project').on('click',function(){
+              let id = $(this).data('id');
+              console.log(id);
+              $.post('/project', {'id':id}, function(data){
+                //data = $.parseJSON(data);
+                openModalWindow(data, 'hello top', 'hello bottom')
+              })
+          })
+
       })
   </script>
   </body>

@@ -3,7 +3,7 @@
       <div class="col-lg-3 col-md-3">
           <div class="list-group small">
               <div class="list-group-item active">Projects Panel</div>
-              <a href="#" class="list-group-item" data-bs-toggle="modal" data-bs-target="#add_project">Add New Project</a>
+              <a href="#" class="add-project list-group-item" data-bs-toggle="modal" data-bs-target="#add_project">Add New Project</a>
               <a href="/projects" class="list-group-item">View all Projects</a>
           </div>
       </div>
@@ -17,13 +17,13 @@
                   <th>Edit</th>
                   <th>Complete</th>
               </tr>
-              <repeat group="{{@projects}}" key="{{@key}}" value="{{@val}}">
+              <repeat group="{{ @projects }}" key="{{ @key }}" value="{{ @val }}">
               <tr>
                   <td>{{ @val.id }}</td>
                   <td>{{ @val.title }}</td>
                   <td><a href="" data-id="{{ @val.hid }}" data-bs-toggle="modal" data-bs-target="#project_details1" class="open-project btn btn-sm btn-block btn-info">Details</a></td>
-                  <td><a href="" data-bs-toggle="modal" data-bs-target="#project_edit_details1" class="btn btn-sm btn-block btn-warning">Edit</a></td>
-                  <td><a href="" class="btn btn-sm btn-block btn-danger" onclick="confirm('Are you sure you want to remove or archive \' Design WorkFlow Project \'?');">Finish</a></td>
+                  <td><a href="" data-id="{{ @val.hid }}" data-bs-toggle="modal" data-bs-target="#project_edit_details1" class="edit-project btn btn-sm btn-block btn-warning">Edit</a></td>
+                  <td><a href="" data-id="{{ @val.hid }}" class="remove-project btn btn-sm btn-block btn-danger" onclick="confirm('Are you sure you want to remove or archive \' Design WorkFlow Project \'?');">Remove</a></td>
               </tr>
               </repeat>
           </table>
@@ -31,45 +31,6 @@
   </div>
 </div>
 
-<!-- dashboard contents -->
-
-<!-- Add Project Modal -->
-<div class="modal fade" id="add_project" tabindex="-1" aria-labelledby="add_project" aria-hidden="true">
-  <div class="modal-dialog">
-  <div class="modal-content">
-      <div class="modal-header">
-      <h5 class="modal-title" id="exampleModalLabel">Add New Project</h5>
-      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-      </button>
-      </div>
-      <div class="modal-body">
-          <form method="POST" action="/projects">
-              
-              <div class="mb-3">
-                  <input type="text" name="title" class="form-control form-control-sm" placeholder="Project Title" required>
-              </div>
-              <div class="mb-3">
-                <div class="mb-3">
-                    <input type="textarea" name="description" class="form-control form-control-sm" placeholder="Project Description" required>
-                </div>
-            </div>
-            <div class="mb-3">
-                <div class="mb-3">
-                    <input type="text" name="client" class="form-control form-control-sm" placeholder="Client" required>
-                </div>
-            </div>
-            <div class="mb-3">
-                <input type="text" name="timetocomplete" class="form-control form-control-sm" placeholder="Time to complete (in hours)" required>
-            </div>
-              <div class="mb-3">
-                  <button type="submit" class="btn btn-sm btn-success btn-block">Add New Project</button>
-              </div>
-          </form>
-      </div>
-  </div>
-  </div>
-</div>
 
 <!-- Edit Project Detaisl -->
 <div class="modal fade" id="project_edit_details1" tabindex="-1" aria-labelledby="project_edit_details1" aria-hidden="true">

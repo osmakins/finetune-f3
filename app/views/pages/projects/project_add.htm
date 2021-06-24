@@ -1,0 +1,21 @@
+<form method="POST" action="/projects">
+  <div class="mb-3">
+      <input type="text" name="title" class="form-control form-control-sm" placeholder="Project Title" required>
+  </div>
+  <div class="mb-3">
+    <div class="mb-3">
+        <input type="textarea" name="description" class="form-control form-control-sm" placeholder="Project Description" required>
+    </div>
+</div>
+<div class="mb-3">
+    <div class="mb-3">
+        <input type="text" name="client" class="form-control form-control-sm" placeholder="Client" required>
+    </div>
+</div>
+<div class="mb-3">
+    <input type="text" name="timetocomplete" class="form-control form-control-sm" placeholder="Time to complete (in hours)" required>
+</div>
+  <div class="mb-3">
+      <button type="submit" class="btn btn-sm btn-success btn-block">Add New Project</button>
+  </div>
+</form>
