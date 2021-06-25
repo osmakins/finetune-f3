@@ -53,21 +53,26 @@ class projectController extends projectModel{
     echo \Template::instance()->render('layout.htm');
   }
 
-  public function updateProject(){
+  
+  public function SelectProjectId(){
     $hid = $this->f3->get('POST.id');
     $id = $this->crypteri->decrypt($hid);
-    $projectArray = $this->editProject($id);
+    $projectArray = $this->getProjectById($id);
     $this->f3->mset($projectArray);
     echo \Template::instance()->render('pages/projects/project_edit.htm');
+  }
 
-    $dataPack = [  
+  public function updateProject(){
+    $dataSet = [
+      ':id' => $id,
       ':title' => $this->f3->get('POST.title'),
       ':description' => $this->f3->get('POST.description'),
       ':client' => $this->f3->get('POST.client'),
       ':timetocomplete' => $this->f3->get('POST.timetocomplete'),
-      ':user_id' => $this->f3->get('SESSION.user_id'),
       ':updated_at' => $this->getCurrentdate()
     ];
+    $this->editProject($dataSet);
+    $this->f3->reroute('/projects');
   }
 
   public function deleteProject(){

@@ -36,18 +36,15 @@ class projectModel extends database{
     return ($count ? true: false);
   }
 
-  public function editProject($id){
+  public function editProject($dataSet){
     if($this->f3->get("SESSION.user") === null){
       $this->f3->reroute("/login");
     }
 
     $this->setDatabase();
-    $query = $this->getDatabase()->exec(
-      'UPDATE projects 
-      SET title = 
-      WHERE id = :id', [':id' =>$id]);
-    
-    return $query[0];
+    $query = $this->getDatabase()->exec('UPDATE projects 
+    SET title = :title, description = :description, client = :client, timetocomplete = :timetocomplete, updated_at = :updated_at 
+    WHERE id = :id ', $dataSet);
   }
 
   public function removeProject($id){

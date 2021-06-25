@@ -1,21 +1,18 @@
-<form>
+<form method="POST" action="/updateproject">
     <div class="mb-3">
-        <input type="text" class="form-control form-control-sm" value="29-07-2020" required>
+        <input type="hidden" name="id" class="form-control form-control-sm" value="{{ @id }}" required>
     </div>
     <div class="mb-3">
-        <input type="text" class="form-control form-control-sm" value="Design WorkFlow" required>
+        <input type="text" name="title" class="form-control form-control-sm" value="{{ @title }}" required>
     </div>
     <div class="mb-3">
-        <input type="text" class="form-control form-control-sm" value="Datero Oy Web App" required>
+        <input type="text" name="description" class="form-control form-control-sm" value="{{ @description }}" required>
     </div>
     <div class="mb-3">
-        <input type="text" class="form-control form-control-sm" value="Timo Tavastia" required>
+        <input type="text" name="client" class="form-control form-control-sm" value="{{ @client }}" required>
     </div>
     <div class="mb-3">
-        <input type="text" class="form-control form-control-sm" value="60 h" required>
-    </div>
-    <div class="mb-3">
-        <input type="text" class="form-control form-control-sm" value="Datero Oy" required>
+        <input type="text" name="timetocomplete" class="form-control form-control-sm" value="{{ @timetocomplete }}" required>
     </div>
     <div class="mb-3">
         <button type="submit" class="btn btn-sm btn-success btn-block">Update Project</button>
