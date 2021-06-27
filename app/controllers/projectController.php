@@ -20,7 +20,11 @@ class projectController extends projectModel{
   }
 
   public function createProject() {
+    $modal = $this->f3->get('POST.modal');
+    if(isset($modal) && strlen(trim($modal))>0){
     echo \Template::instance()->render('pages/projects/project_add.htm');
+    exit;
+  }
     $dataPack = [  
       ':title' => $this->f3->get('POST.title'),
       ':description' => $this->f3->get('POST.description'),
@@ -58,11 +62,14 @@ class projectController extends projectModel{
     $hid = $this->f3->get('POST.id');
     $id = $this->crypteri->decrypt($hid);
     $projectArray = $this->getProjectById($id);
+    $projectArray["hid"] = $this->crypteri->encrypt($projectArray["id"]);
     $this->f3->mset($projectArray);
     echo \Template::instance()->render('pages/projects/project_edit.htm');
   }
 
   public function updateProject(){
+    $hid = $this->f3->get('POST.hid');
+    $id = $this->crypteri->decrypt($hid);
     $dataSet = [
       ':id' => $id,
       ':title' => $this->f3->get('POST.title'),
@@ -71,6 +78,7 @@ class projectController extends projectModel{
       ':timetocomplete' => $this->f3->get('POST.timetocomplete'),
       ':updated_at' => $this->getCurrentdate()
     ];
+
     $this->editProject($dataSet);
     $this->f3->reroute('/projects');
   }
