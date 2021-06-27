@@ -126,7 +126,7 @@
 
           $('.open-project').on('click',function(){
               let id = $(this).data('id');
-              $.post('/project', {'id':id}, function(data){
+              $.post('/project', {'id':id, modal: true}, function(data){
                 // data = $.parseJSON(data);
                 openModalWindow(data, 'hello top', 'hello bottom')
               })
@@ -134,7 +134,7 @@
 
           $('.edit-project').on('click',function(){
               let id = $(this).data('id');
-              $.post('/projectid', {'id':id}, function(data){
+              $.post('/updateproject', {'id':id, modal: true}, function(data){
                 //data = $.parseJSON(data);
                 openModalWindow(data, 'hello top', 'hello bottom')
               })

@@ -19,12 +19,37 @@ class projectController extends projectModel{
     echo \Template::instance()->render('layout.htm');
   }
 
-  public function createProject() {
-    $modal = $this->f3->get('POST.modal');
-    if(isset($modal) && strlen(trim($modal))>0){
-    echo \Template::instance()->render('pages/projects/project_add.htm');
-    exit;
+  public function readProjects(){
+    $projects = $this->getProjects();
+		$this->f3->set('projects', $projects);
+    $this->f3->set('content', 'pages/projects/project.htm');
+    echo \Template::instance()->render('layout.htm');
   }
+
+  public function showModal($content){
+    $modal = $this->f3->get('POST.modal');
+    $hid = $this->f3->get('POST.id');
+    if(isset($modal)){
+      if(isset($hid)){
+        $id = $this->crypteri->decrypt($hid);
+        $projectArray = $this->getProjectById($id);
+        $projectArray["hid"] = $hid;
+        $this->f3->mset($projectArray);
+        echo \Template::instance()->render($content);
+        exit;
+      }
+      echo \Template::instance()->render($content);
+      exit;
+    }
+  }
+  
+  public function readProjectById(){
+    $this->showModal('pages/projects/project_details.htm');
+  }
+
+  public function createProject() {
+    $this->showModal('pages/projects/project_add.htm');
+
     $dataPack = [  
       ':title' => $this->f3->get('POST.title'),
       ':description' => $this->f3->get('POST.description'),
@@ -50,24 +75,9 @@ class projectController extends projectModel{
     $this->f3->reroute('/projects');
   }
 
-  public function readProjects(){
-    $projects = $this->getProjects();
-		$this->f3->set('projects', $projects);
-    $this->f3->set('content', 'pages/projects/project.htm');
-    echo \Template::instance()->render('layout.htm');
-  }
-
-  
-  public function SelectProjectId(){
-    $hid = $this->f3->get('POST.id');
-    $id = $this->crypteri->decrypt($hid);
-    $projectArray = $this->getProjectById($id);
-    $projectArray["hid"] = $this->crypteri->encrypt($projectArray["id"]);
-    $this->f3->mset($projectArray);
-    echo \Template::instance()->render('pages/projects/project_edit.htm');
-  }
-
   public function updateProject(){
+    $this->showModal('pages/projects/project_edit.htm');
+
     $hid = $this->f3->get('POST.hid');
     $id = $this->crypteri->decrypt($hid);
     $dataSet = [
@@ -87,11 +97,5 @@ class projectController extends projectModel{
 
   }
 
-  public function readProjectById(){
-    $hid = $this->f3->get('POST.id');
-    $id = $this->crypteri->decrypt($hid);
-    $projectArray = $this->getProjectById($id);
-    $this->f3->mset($projectArray);
-    echo \Template::instance()->render('pages/projects/project_details.htm');
-  }
+  
 }
