@@ -47,7 +47,8 @@ class projectModel extends database{
     WHERE id = :id ', $dataSet);
   }
 
-  public function removeProject($id){
-    
+  public function deleteProject($id){
+    $this->setDatabase();
+    $query = $this->getDatabase()->exec('DELETE FROM projects WHERE id = :id', [':id' => $id]);
   }
 }

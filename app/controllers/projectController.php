@@ -42,7 +42,7 @@ class projectController extends projectModel{
       exit;
     }
   }
-  
+
   public function readProjectById(){
     $this->showModal('pages/projects/project_details.htm');
   }
@@ -93,9 +93,12 @@ class projectController extends projectModel{
     $this->f3->reroute('/projects');
   }
 
-  public function deleteProject(){
-
+  public function removeProject(){
+    $this->showModal('pages/projects/project_delete.htm');
+    $hid = $this->f3->get('POST.hid');
+    $id = $this->crypteri->decrypt($hid);
+    
+    $this->deleteProject($id);
+    $this->f3->reroute('/projects');
   }
-
-  
 }

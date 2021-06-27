@@ -21,9 +21,9 @@
               <tr>
                   <td>{{ @val.id }}</td>
                   <td>{{ @val.title }}</td>
-                  <td><a href="" data-id="{{ @val.hid }}" data-bs-toggle="modal" data-bs-target="#project_details1" class="open-project btn btn-sm btn-block btn-info">Details</a></td>
-                  <td><a href="" data-id="{{ @val.hid }}" data-bs-toggle="modal" data-bs-target="#project_edit_details1" class="edit-project btn btn-sm btn-block btn-warning">Edit</a></td>
-                  <td><a href="" data-id="{{ @val.hid }}" class="remove-project btn btn-sm btn-block btn-danger" onclick="confirm('Are you sure you want to remove or archive \' Design WorkFlow Project \'?');">Remove</a></td>
+                  <td><a href="" data-id="{{ @val.hid }}" data-bs-toggle="modal" class="open-project btn btn-sm btn-block btn-info">Details</a></td>
+                  <td><a href="" data-id="{{ @val.hid }}" data-bs-toggle="modal" class="edit-project btn btn-sm btn-block btn-warning">Edit</a></td>
+                  <td><a href="" data-id="{{ @val.hid }}" data-bs-toggle="modal" class="del-project btn btn-sm btn-block btn-danger" onclick="confirm('Are you sure you want to remove or archive \' Design WorkFlow Project \'?');">Remove</a></td>
               </tr>
               </repeat>
           </table>
