@@ -1,11 +1,11 @@
 <?php
 
 class staffModel extends database{
-  public function getStaff($id){
+  public function getStaffById($id){
     
   }
 
-  public function getStaffs(){
+  public function getStaff(){
     
   }
 

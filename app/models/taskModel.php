@@ -2,7 +2,7 @@
 
 class taskModel extends database{
 
-  public function getTask($id){
+  public function getTaskById($id){
     
   }
 
