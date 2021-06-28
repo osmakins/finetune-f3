@@ -15,6 +15,6 @@ class analyticsController extends analyticsModel{
 	}
 
   public function analytics(){
-    $this->f3->set('content', 'pages/analytics.htm');
+    $this->f3->set('content', 'pages/analytics/analytics.htm');
   }
 }
