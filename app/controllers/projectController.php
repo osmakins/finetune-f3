@@ -19,6 +19,21 @@ class projectController extends projectModel{
     echo \Template::instance()->render('layout.htm');
   }
 
+  public function routeProject(){
+    if($this->f3->get('POST.create') !== NULL){
+      $this->createProject();
+    }
+    if($this->f3->get('POST.read') !== NULL){
+      $this->readProjectById();
+    }
+    if($this->f3->get('POST.update') !== NULL){
+      $this->updateProject();
+    }
+    if($this->f3->get('POST.delete') !== NULL){
+      $this->removeProject();
+    }
+  }
+
   public function readProjects(){
     $projects = $this->getProjects();
 		$this->f3->set('projects', $projects);

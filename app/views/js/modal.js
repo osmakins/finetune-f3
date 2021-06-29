@@ -39,7 +39,7 @@ $(document).ready(function(){
 
     $('.open-project').on('click',function(){
         let id = $(this).data('id');
-        $.post('/project', {'id':id, modal: true}, function(data){
+        $.post('/routeproject', {'id':id, read: 'read', modal: true}, function(data){
           // data = $.parseJSON(data);
           openModalWindow(data, 'Project Details', null);
         })
@@ -47,20 +47,20 @@ $(document).ready(function(){
 
     $('.edit-project').on('click',function(){
         let id = $(this).data('id');
-        $.post('/updateproject', {'id':id, modal: true}, function(data){
+        $.post('/routeproject', {'id':id, update:'update', modal: true}, function(data){
           openModalWindow(data, 'Update Project', null)
         })
     })
 
     $('.add-project').on('click',function(){
-        $.post('/addproject', {modal: true}, function(data){
+        $.post('/routeproject', {create: 'create', modal: true}, function(data){
           openModalWindow(data, 'Add Project', null)
         })
     })
 
     $('.del-project').on('click',function(){
         let id = $(this).data('id');
-        $.post('/removeproject', {'id':id, modal: true}, function(data){
+        $.post('/routeproject', {'id':id, delete:'delete', modal: true}, function(data){
           openModalWindow(data, 'Delete Project?', null);
         })
     })
