@@ -16,7 +16,9 @@ class projectModel extends database{
     $db = $this->getDatabase();
     $query = $db->exec('SELECT * FROM projects');
     foreach($query as $key => $value){
-      $query[$key]['hid'] = $this->crypteri->encrypt($value['id']);
+      //$query[$key]['hid'] = $this->crypteri->encrypt($value['id']);
+      $hid = $this->crypteri->encrypt($value['id']);
+      $query[$key]['config'] = json_encode(['id' => $hid, 'path'=>'projects']);
     }
     return $query;
   }

@@ -21,9 +21,9 @@
               <tr>
                   <td>{{ @val.id }}</td>
                   <td id="project_title">{{ @val.title }}</td>
-                  <td><a href="" data-id="{{ @val.hid }}" data-bs-toggle="modal" class="open-project btn btn-sm btn-block btn-info">Details</a></td>
-                  <td><a href="" data-id="{{ @val.hid }}" data-bs-toggle="modal" class="edit-project btn btn-sm btn-block btn-warning">Edit</a></td>
-                  <td><a href="" data-id="{{ @val.hid }}" data-bs-toggle="modal" class="del-project btn btn-sm btn-block btn-danger">Remove</a></td>
+                  <td><a href="" data-config="{{ @val.config }}" data-action="open" data-bs-toggle="modal" class="project-modal btn btn-sm btn-block btn-info">Details</a></td>
+                  <td><a href="" data-config="{{ @val.config }}" data-action="edit" data-bs-toggle="modal" class="project-modal btn btn-sm btn-block btn-warning">Edit</a></td>
+                  <td><a href="" data-config="{{ @val.config }}" data-action="delete" data-bs-toggle="modal" class="project-modal btn btn-sm btn-block btn-danger">Remove</a></td>
               </tr>
               </repeat>
           </table>

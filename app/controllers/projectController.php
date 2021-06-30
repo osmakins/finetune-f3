@@ -14,16 +14,35 @@ class projectController extends projectModel{
     parent::__construct($f3);
   }
 
-  public function projects(){
-    $this->f3->set('content', 'pages/projects/project.htm');
-    echo \Template::instance()->render('layout.htm');
-  }
+  // public function projects(){
+  //   $this->f3->set('content', 'pages/projects/project.htm');
+  //   echo \Template::instance()->render('layout.htm');
+  // }
 
+  public function projects(){
+    $method = $this->f3->get('SERVER.REQUEST_METHOD');
+    if($method === 'GET'){ 
+      $id = $this->f3->get('GET.id');
+      if(isset($id)){
+        $path = $this->f3->get('GET.path');
+        
+        $this->readProjectById();
+        exit;
+      }
+      $this->readProjects();
+      exit;
+    }
+    else if($method === 'PUT'){
+      echo "success!";
+      exit;
+    }
+  }
   public function routeProject(){
     if($this->f3->get('POST.create') !== NULL){
       $this->createProject();
     }
     if($this->f3->get('POST.read') !== NULL){
+      var_dump($this->f3->get('SERVER.REQUEST_METHOD'));
       $this->readProjectById();
     }
     if($this->f3->get('POST.update') !== NULL){
@@ -42,8 +61,8 @@ class projectController extends projectModel{
   }
 
   public function showModal($content){
-    $modal = $this->f3->get('POST.modal');
-    $hid = $this->f3->get('POST.id');
+    $modal = $this->f3->get('GET.modal');
+    $hid = $this->f3->get('GET.id');
     if(isset($modal)){
       if(isset($hid)){
         $id = $this->crypteri->decrypt($hid);

@@ -8,12 +8,12 @@ $(document).ready(function(){
         output += '<div class="modal-content">';
         output += '<div class="modal-header top-card-header">';
         output +=        '<h5 class="modal-title" id="gal_descLabel">' +        (title ? title : "") +        "</h5>";
-        output +=        '<button type="button" class="btn-close closeWhite" data-bs-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
+        output +=        '<button type="button" class="btn-close closeWhite" data-bs-dismiss="modal" aria-label="Close"/>';
         output += "</div>";
         output += '<div class="modal-body" style="text-align: left;">';
         output += html ? html : "&nbsp;";
         output += "</div>";
-        output +=        '<div class="modal-footer">' +        (bottomDesc ? bottomDesc : "&nbsp;") +        '<button class="btn btn-sm btn-secondary" data-bs-dismiss="modal" aria-hidden="true"><span class="fa fa-times"></span> &nbsp; close </button></div>';
+        output +=        '<div class="modal-footer">' +        (bottomDesc ? bottomDesc : "&nbsp;") +        '<button class="btn btn-sm btn-secondary" data-bs-dismiss="modal" aria-hidden="true"><span class="fa fa-times"></span> &nbsp; dismiss </button></div>';
         output += "</div>";
         output += "</div>";
         output += "</div>";
@@ -37,31 +37,23 @@ $(document).ready(function(){
         });
     }
 
-    $('.open-project').on('click',function(){
-        let id = $(this).data('id');
-        $.post('/routeproject', {'id':id, read: 'read', modal: true}, function(data){
-          // data = $.parseJSON(data);
-          openModalWindow(data, 'Project Details', null);
+    function route(url, method, data, success){
+        $.ajax({
+            url:'/'+url,
+            method: method.toUpperCase(),
+            data: data,
+            success: success
         })
-    })
+    }
+    
+    $('.project-modal').on('click', function(){
+        let config = $(this).data('config');
+        config.action = $(this).data('action');
+        config.modal = true;
 
-    $('.edit-project').on('click',function(){
-        let id = $(this).data('id');
-        $.post('/routeproject', {'id':id, update:'update', modal: true}, function(data){
-          openModalWindow(data, 'Update Project', null)
-        })
-    })
-
-    $('.add-project').on('click',function(){
-        $.post('/routeproject', {create: 'create', modal: true}, function(data){
-          openModalWindow(data, 'Add Project', null)
-        })
-    })
-
-    $('.del-project').on('click',function(){
-        let id = $(this).data('id');
-        $.post('/routeproject', {'id':id, delete:'delete', modal: true}, function(data){
-          openModalWindow(data, 'Delete Project?', null);
+        route('modal', 'get', config, function(data){
+            console.log(data)
+            openModalWindow(data, 'Project Details', null);
         })
     })
 });
