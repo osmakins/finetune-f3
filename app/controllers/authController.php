@@ -10,6 +10,9 @@ class authController extends authModel{
 	}
 
     public function login(){
+        if($this->f3->get('SESSION.user') !== NULL){
+            $this->f3->reroute('/dashboard');
+        }
         $this->f3->set('content', 'user/login.htm');
     }
 

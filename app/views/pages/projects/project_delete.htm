@@ -1,8 +1,8 @@
-<form method="POST" action="/removeproject">
+<form method="POST" action="/project">
   <div class="mb-3">
     <input type="hidden" name="hid" class="form-control form-control-sm" value="{{ @hid }}" required>
   </div>
   <div class="mb-3">
-    <button type="submit" class="btn btn-sm btn-danger btn-block">Yes, Delete</button>
+    <button type="submit" name="delete_project" class="btn btn-sm btn-danger btn-block" value="delete_project">Yes, Delete</button>
   </div>
 </form>

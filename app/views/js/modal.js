@@ -37,31 +37,17 @@ $(document).ready(function(){
         });
     }
 
-    $('.open-project').on('click',function(){
+    $('.project-modal').on('click', function(){
+        let action = $(this).data('action');
         let id = $(this).data('id');
-        $.post('/routeproject', {'id':id, read: 'read', modal: true}, function(data){
-          // data = $.parseJSON(data);
-          openModalWindow(data, 'Project Details', null);
+        $.ajax({
+            url:'/project',
+            method: 'POST',
+            data: {'id':id, 'action':action, modal: true},
+            success: function(data){
+                openModalWindow(data, 'Modal title', null)
+            }
         })
-    })
 
-    $('.edit-project').on('click',function(){
-        let id = $(this).data('id');
-        $.post('/routeproject', {'id':id, update:'update', modal: true}, function(data){
-          openModalWindow(data, 'Update Project', null)
-        })
-    })
-
-    $('.add-project').on('click',function(){
-        $.post('/routeproject', {create: 'create', modal: true}, function(data){
-          openModalWindow(data, 'Add Project', null)
-        })
-    })
-
-    $('.del-project').on('click',function(){
-        let id = $(this).data('id');
-        $.post('/routeproject', {'id':id, delete:'delete', modal: true}, function(data){
-          openModalWindow(data, 'Delete Project?', null);
-        })
     })
 });

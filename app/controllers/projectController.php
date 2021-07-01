@@ -14,31 +14,37 @@ class projectController extends projectModel{
     parent::__construct($f3);
   }
 
-  public function projects(){
-    $this->f3->set('content', 'pages/projects/project.htm');
-    echo \Template::instance()->render('layout.htm');
-  }
+  public function project(){
+    $method = $this->f3->get('SERVER.REQUEST_METHOD');
 
-  public function routeProject(){
-    if($this->f3->get('POST.create') !== NULL){
-      $this->createProject();
+    if($method === 'GET'){
+      $projects = $this->getProjects();
+		  $this->f3->set('projects', $projects);
+      $this->f3->set('content', 'pages/projects/project.htm');
+      echo \Template::instance()->render('layout.htm');
+      exit;
     }
-    if($this->f3->get('POST.read') !== NULL){
-      $this->readProjectById();
-    }
-    if($this->f3->get('POST.update') !== NULL){
-      $this->updateProject();
-    }
-    if($this->f3->get('POST.delete') !== NULL){
-      $this->removeProject();
-    }
-  }
 
-  public function readProjects(){
-    $projects = $this->getProjects();
-		$this->f3->set('projects', $projects);
-    $this->f3->set('content', 'pages/projects/project.htm');
-    echo \Template::instance()->render('layout.htm');
+    else if($method === 'POST'){
+      $action = $this->f3->get('POST.action');
+
+      if(isset($action) && $action ==='detail'){
+        $this->showModal('pages/projects/project_details.htm');
+      }
+      else if((isset($action) && $action ==='create') || $this->f3->get('POST.create_project') !== NULL){
+        $this->createProject();
+      }
+      else if((isset($action) && $action ==='update') || $this->f3->get('POST.update_project') !== NULL){
+        $this->updateProject();
+      }
+      else if((isset($action) && $action ==='delete') || $this->f3->get('POST.delete_project') !== NULL){
+        $this->removeProject();
+      }
+      else{
+        $this->f3->set('content', 'pages/error.htm');
+        echo \Template::instance()->render('layout.htm');
+      }
+    } 
   }
 
   public function showModal($content){
@@ -56,10 +62,6 @@ class projectController extends projectModel{
       echo \Template::instance()->render($content);
       exit;
     }
-  }
-
-  public function readProjectById(){
-    $this->showModal('pages/projects/project_details.htm');
   }
 
   public function createProject() {
@@ -87,7 +89,7 @@ class projectController extends projectModel{
       print_r($this->f3->get('ERROR'));
       print_r('</pre>');
     }
-    $this->f3->reroute('/projects');
+    $this->f3->reroute('/project');
   }
 
   public function updateProject(){
@@ -105,7 +107,7 @@ class projectController extends projectModel{
     ];
 
     $this->editProject($dataSet);
-    $this->f3->reroute('/projects');
+    $this->f3->reroute('/project');
   }
 
   public function removeProject(){
@@ -114,6 +116,6 @@ class projectController extends projectModel{
     $id = $this->crypteri->decrypt($hid);
     
     $this->deleteProject($id);
-    $this->f3->reroute('/projects');
+    $this->f3->reroute('/project');
   }
 }
