@@ -8,7 +8,7 @@ $(document).ready(function(){
         output += '<div class="modal-content">';
         output += '<div class="modal-header top-card-header">';
         output +=        '<h5 class="modal-title" id="gal_descLabel">' +        (title ? title : "") +        "</h5>";
-        output +=        '<button type="button" class="btn-close closeWhite" data-bs-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
+        output +=        '<button type="button" class="btn-close closeWhite" data-bs-dismiss="modal" aria-label="Close"/>';
         output += "</div>";
         output += '<div class="modal-body" style="text-align: left;">';
         output += html ? html : "&nbsp;";
@@ -38,16 +38,12 @@ $(document).ready(function(){
     }
 
     $('.project-modal').on('click', function(){
-        let action = $(this).data('action');
+        let display = $(this).data('display');
+        let title = $(this).data('title')
         let id = $(this).data('id');
-        $.ajax({
-            url:'/project',
-            method: 'POST',
-            data: {'id':id, 'action':action, modal: true},
-            success: function(data){
-                openModalWindow(data, 'Modal title', null)
-            }
+        $.post('/project', {'id':id, 'display': display, modal: true})
+        .done(function(data){
+            openModalWindow(data, title, null)
         })
-
     })
 });

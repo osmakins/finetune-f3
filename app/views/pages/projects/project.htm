@@ -3,7 +3,7 @@
       <div class="col-lg-3 col-md-3">
           <div class="list-group small">
               <div class="list-group-item active">Projects Panel</div>
-              <a href="#" class="project-modal list-group-item" data-action="create" data-bs-toggle="modal" data-bs-target="#add_project">Add New Project</a>
+              <a href="#" class="project-modal list-group-item" data-display="create" data-title="Add Project" data-bs-toggle="modal" data-bs-target="#add_project">Add New Project</a>
               <a href="/projects" class="list-group-item">View all Projects</a>
           </div>
       </div>
@@ -18,13 +18,13 @@
                   <th>Complete</th>
               </tr>
               <repeat group="{{ @projects }}" key="{{ @key }}" value="{{ @val }}">
-              <tr>
-                  <td>{{ @val.id }}</td>
-                  <td id="project_title">{{ @val.title }}</td>
-                  <td><a href="" data-id="{{ @val.hid }}" data-action="detail" data-bs-toggle="modal" class="project-modal btn btn-sm btn-block btn-info">Details</a></td>
-                  <td><a href="" data-id="{{ @val.hid }}" data-action="update" data-bs-toggle="modal" class="project-modal btn btn-sm btn-block btn-warning">Edit</a></td>
-                  <td><a href="" data-id="{{ @val.hid }}" data-action="delete" data-bs-toggle="modal" class="project-modal btn btn-sm btn-block btn-danger">Remove</a></td>
-              </tr>
+                <tr>
+                    <td>{{ @val.id }}</td>
+                    <td id="project_title">{{ @val.title }}</td>
+                    <td><a href="" data-id="{{ @val.hid }}" data-display="detail" data-title="Project Details" data-bs-toggle="modal" class="project-modal btn btn-sm btn-block btn-info">Details</a></td>
+                    <td><a href="" data-id="{{ @val.hid }}" data-display="update" data-title="Update Project" data-bs-toggle="modal" class="project-modal btn btn-sm btn-block btn-warning">Edit</a></td>
+                    <td><a href="" data-id="{{ @val.hid }}" data-display="delete" data-title="Delete Project?" data-bs-toggle="modal" class="project-modal btn btn-sm btn-block btn-danger">Remove</a></td>
+                </tr>
               </repeat>
           </table>
       </div>
