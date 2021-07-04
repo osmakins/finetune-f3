@@ -38,10 +38,10 @@ $(document).ready(function(){
     }
 
     $('.project-modal').on('click', function(){
-        let display = $(this).data('display');
+        let submit = $(this).data('submit');
         let title = $(this).data('title')
         let id = $(this).data('id');
-        $.post('/project', {'id':id, 'display': display, modal: true})
+        $.post('/project', {'id':id, 'submit': submit, modal: true})
         .done(function(data){
             openModalWindow(data, title, null)
         })

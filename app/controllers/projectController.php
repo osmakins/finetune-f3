@@ -1,8 +1,6 @@
 <?php
 
 class projectController extends projectModel{
-  
-  // use pagesTrait;
 
   public $f3;
 
@@ -25,32 +23,13 @@ class projectController extends projectModel{
       exit;
     }
 
-    else if($method === 'POST'){
-      $modal_display = $this->f3->get('POST.display');
+    if($method === 'POST'){
       $submit = $this->f3->get('POST.submit');
-
-      if(isset($modal_display)){
-        switch($modal_display){
-          case 'detail':
-            $this->showModal('pages/projects/project_detail.htm');
-            break;
-          case 'create':
-            $this->showModal('pages/projects/project_create.htm');
-            break;
-          case 'update':
-            $this->showModal('pages/projects/project_update.htm');
-            break;
-          case 'delete':
-            $this->showModal('pages/projects/project_delete.htm');
-            break;
-          default:
-            $this->showModal('pages/error.htm');
-            break;
-        }
-      }
-
-    if(isset($submit)){
+      if(isset($submit)){
         switch($submit){
+          case 'detail':
+            $this->detailProject();
+            break;
           case 'create':
             $this->createProject();
             break;
@@ -61,8 +40,8 @@ class projectController extends projectModel{
             $this->removeProject();
             break;
           default:
-            $this->f3->set('content', 'pages/error.htm');
-            echo \Template::instance()->render('layout.htm');
+            $this->showModal('pages/error.htm');
+            $this->f3->reroute('/error');
             break;
         }
       }
@@ -86,7 +65,12 @@ class projectController extends projectModel{
     }
   }
 
+  public function detailProject(){
+    $this->showModal('pages/projects/project_detail.htm');
+  }
+
   public function createProject() {
+    $this->showModal('pages/projects/project_create.htm');
 
     $dataPack = [  
       ':title' => $this->f3->get('POST.title'),
@@ -96,6 +80,7 @@ class projectController extends projectModel{
       ':user_id' => $this->f3->get('SESSION.user_id'),
       ':created_at' => $this->getCurrentdate()
     ];
+
     $status = TRUE;
     foreach($dataPack as $k=>$v){
       if(!strlen($v)){
@@ -114,6 +99,7 @@ class projectController extends projectModel{
   }
 
   public function updateProject(){
+    $this->showModal('pages/projects/project_update.htm');
 
     $hid = $this->f3->get('POST.hid');
     $id = $this->crypteri->decrypt($hid);
@@ -131,6 +117,7 @@ class projectController extends projectModel{
   }
 
   public function removeProject(){
+    $this->showModal('pages/projects/project_delete.htm');
     
     $hid = $this->f3->get('POST.hid');
     $id = $this->crypteri->decrypt($hid);
