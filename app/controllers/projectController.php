@@ -12,42 +12,6 @@ class projectController extends projectModel{
     parent::__construct($f3);
   }
 
-  public function projects(){
-    $method = $this->f3->get('SERVER.REQUEST_METHOD');
-
-    if($method === 'GET'){
-      $projects = $this->getProjects();
-		  $this->f3->set('projects', $projects);
-      $this->f3->set('content', 'pages/projects/projects.htm');
-      echo \Template::instance()->render('layout.htm');
-      exit;
-    }
-
-    if($method === 'POST'){
-      $submit = $this->f3->get('POST.submit');
-      if(isset($submit)){
-        switch($submit){
-          case 'detail':
-            $this->detailProject();
-            break;
-          case 'create':
-            $this->createProject();
-            break;
-          case 'update':
-            $this->updateProject();
-            break;
-          case 'delete':
-            $this->removeProject();
-            break;
-          default:
-            $this->showModal('pages/error.htm');
-            $this->f3->reroute('/error');
-            break;
-        }
-      }
-    } 
-  }
-
   public function showModal($content){
     $modal = $this->f3->get('POST.modal');
     $hid = $this->f3->get('POST.id');
@@ -63,10 +27,6 @@ class projectController extends projectModel{
       echo \Template::instance()->render($content);
       exit;
     }
-  }
-
-  public function detailProject(){
-    $this->showModal('pages/projects/project_detail.htm');
   }
 
   public function createProject() {
@@ -122,5 +82,39 @@ class projectController extends projectModel{
     
     $this->deleteProject($id);
     $this->f3->reroute('/projects');
+  }
+
+  public function projects(){
+    $method = $this->f3->get('SERVER.REQUEST_METHOD');
+
+    if($method === 'GET'){
+      $projects = $this->getProjects();
+		  $this->f3->set('projects', $projects);
+      $this->f3->set('content', 'pages/projects/projects.htm');
+      echo \Template::instance()->render('layout.htm');
+      exit;
+    }
+    
+    $submit = $this->f3->get('POST.submit');
+    $crud_isset = ($method === 'POST' && $submit !== NULL) ? $submit : FALSE;
+
+    switch($crud_isset){
+      case 'detail':
+        $this->showModal('pages/projects/project_detail.htm');
+        break;
+      case 'create':
+        $this->createProject();
+        break;
+      case 'update':
+        $this->updateProject();
+        break;
+      case 'delete':
+        $this->removeProject();
+        break;
+      default:
+        $this->showModal('pages/error.htm');
+        $this->f3->reroute('/error');
+        break;
+    }
   }
 }
