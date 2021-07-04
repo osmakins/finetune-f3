@@ -12,13 +12,13 @@ class projectController extends projectModel{
     parent::__construct($f3);
   }
 
-  public function project(){
+  public function projects(){
     $method = $this->f3->get('SERVER.REQUEST_METHOD');
 
     if($method === 'GET'){
       $projects = $this->getProjects();
 		  $this->f3->set('projects', $projects);
-      $this->f3->set('content', 'pages/projects/project.htm');
+      $this->f3->set('content', 'pages/projects/projects.htm');
       echo \Template::instance()->render('layout.htm');
       exit;
     }
@@ -91,11 +91,9 @@ class projectController extends projectModel{
     if($status){
       $this->addProject($dataPack);
     }else{
-      print_r('<pre>');
-      print_r($this->f3->get('ERROR'));
-      print_r('</pre>');
+      $this->f3->reroute('/error');
     }
-    $this->f3->reroute('/project');
+    $this->f3->reroute('/projects');
   }
 
   public function updateProject(){
@@ -113,7 +111,7 @@ class projectController extends projectModel{
     ];
 
     $this->editProject($dataSet);
-    $this->f3->reroute('/project');
+    $this->f3->reroute('/projects');
   }
 
   public function removeProject(){
@@ -123,6 +121,6 @@ class projectController extends projectModel{
     $id = $this->crypteri->decrypt($hid);
     
     $this->deleteProject($id);
-    $this->f3->reroute('/project');
+    $this->f3->reroute('/projects');
   }
 }

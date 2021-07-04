@@ -41,7 +41,7 @@ $(document).ready(function(){
         let submit = $(this).data('submit');
         let title = $(this).data('title')
         let id = $(this).data('id');
-        $.post('/project', {'id':id, 'submit': submit, modal: true})
+        $.post('/projects', {'id':id, 'submit': submit, modal: true})
         .done(function(data){
             openModalWindow(data, title, null)
         })
