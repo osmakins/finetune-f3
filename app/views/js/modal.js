@@ -46,4 +46,14 @@ $(document).ready(function(){
             openModalWindow(data, title, null)
         })
     })
+
+    $('.task-modal').on('click', function(){
+        let submit = $(this).data('submit');
+        let title = $(this).data('title')
+        let id = $(this).data('id');
+        $.post('/tasks', {'id':id, 'submit': submit, modal: true})
+        .done(function(data){
+            openModalWindow(data, title, null)
+        })
+    })
 });
