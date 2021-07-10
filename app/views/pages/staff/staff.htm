@@ -3,7 +3,7 @@
       <div class="col-lg-3 col-md-3 xs">
           <div class="list-group small">
               <div class="list-group-item active">Staff Panel</div>
-              <a href="" class="list-group-item" data-bs-toggle="modal" data-bs-target="#add_staff">Add New Member</a>
+              <a href="" data-title="Add Staff" data-submit="create" class="staff-modal list-group-item" data-bs-toggle="modal" data-bs-target="#add_staff">Add New Member</a>
               <a href="/staff" class="list-group-item">View all Members</a>
           </div>
       </div>
@@ -21,9 +21,9 @@
                   <td>1</td>
                   <td>Timo Tavastia</td>
                   <td>timotavastia@email.com</td>
-                  <td><a href="" data-bs-toggle="modal" data-bs-target="#staff_details1" class="btn btn-sm btn-block btn-info">Details</a></td>
-                  <td><a href="" data-bs-toggle="modal" data-bs-target="#staff_edit_details1" class="btn btn-sm btn-block btn-warning">Edit</a></td>
-                  <td><a href="" class="btn btn-sm btn-block btn-danger" onclick="confirm('Are you sure you want to delete \' John Doe \'?');">Remove</a></td>
+                  <td><a href="" data-id="{{ @val.hid }}" data-title="Staff Details" data-submit="detail" data-bs-toggle="modal" data-bs-target="#staff_details1" class="staff-modal btn btn-sm btn-block btn-info">Details</a></td>
+                  <td><a href="" data-id="{{ @val.hid }}" data-title="Staff Update" data-submit="update" data-bs-toggle="modal" data-bs-target="#staff_edit_details1" class="staff-modal btn btn-sm btn-block btn-warning">Edit</a></td>
+                  <td><a href="" data-id="{{ @val.hid }}" data-title="Delete Staff?" data-submit="delete" class="staff-modal btn btn-sm btn-block btn-danger" onclick="confirm('Are you sure you want to delete \' John Doe \'?');">Remove</a></td>
               </tr>
           </table>
       </div>
