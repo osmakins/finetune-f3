@@ -1,11 +1,11 @@
 <!-- Add Task Modal -->
-<form>
-  <div class="mb-3">
-      <input type="date" class="form-control form-control-sm" required>
-  </div>
-  <div class="mb-3">
-      <input type="text" class="form-control form-control-sm" placeholder="Task Title" required>
-  </div>
+<form method="POST" action="/tasks">
+    <div class="mb-3">
+        <input type="text" name="title" class="form-control form-control-sm" value="{{ @title }}" required>
+    </div>
+    <div class="mb-3">
+        <textarea name="description" class="form-control form-control-sm" required></textarea>
+    </div>
   <div class="mb-3">
     <select class="form-control form-control-sm">
         <option selected>Select Project:</option>
@@ -13,21 +13,10 @@
         <option value="Account Logs App">Account Logs App</option>
         <option value="Triple Dots Essential">Triple Dots Essential</option>
     </select>
-</div>
-<div class="mb-3">
-<select class="form-control form-control-sm">
-    <option selected>Assign Task To:</option>
-    <option value="Timo Tavastia">Timo Tavastia</option>
-    <option value="Marja Juntti">Marja Juntti</option>
-    <option value="Janne Koskinen">Janne Koskinen</option>
-</select>
-</div>
-<div class="mb-3">
-    <input type="text" class="form-control form-control-sm" placeholder="Time to complete (in hours)" required>
-</div>
-<div class="mb-3">
-    <input type="text" class="form-control form-control-sm" placeholder="Client" required>
-</div>
+  </div>
+  <div class="mb-3">
+    <input type="text" class="form-control form-control-sm" placeholder="Time assigned (in hours)" required>
+  </div>
   <div class="mb-3">
       <button type="submit" class="btn btn-sm btn-success btn-block">Add New Task</button>
   </div>

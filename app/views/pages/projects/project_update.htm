@@ -6,7 +6,7 @@
         <input type="text" name="title" class="form-control form-control-sm" value="{{ @title }}" required>
     </div>
     <div class="mb-3">
-        <input type="text" name="description" class="form-control form-control-sm" value="{{ @description }}" required>
+        <textarea name="description" class="form-control form-control-sm" value="{{ @description }}" required>{{ @description }}</textarea>
     </div>
     <div class="mb-3">
         <input type="text" name="client" class="form-control form-control-sm" value="{{ @client }}" required>
