@@ -9,7 +9,20 @@ class dashboardModel extends database{
   public function countStaff(){
     $this->setDatabase();
     $db = $this->getDatabase();
-    $query = $db->exec('SELECT username FROM users WHERE username = :name', [':name' => $name]);
+    $query = $db->exec('SELECT * FROM users');
+      return (count($query));
+  }
+
+  public function countProjects(){
+    $this->setDatabase();
+    $db = $this->getDatabase();
+    $query = $db->exec('SELECT * FROM projects');
+      return (count($query));
+  }
+  public function countTasks(){
+    $this->setDatabase();
+    $db = $this->getDatabase();
+    $query = $db->exec('SELECT * FROM tasks');
       return (count($query));
   }
 }
