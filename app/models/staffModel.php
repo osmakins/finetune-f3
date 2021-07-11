@@ -1,9 +1,9 @@
 <?php
 
 class staffModel extends database{
-  public function __construct($f3){
-    parent::__construct($f3);
-  }
+  // public function __construct($f3){
+  //   parent::__construct($f3);
+  // }
 
   public function getStaffById($id){
     $this->setDatabase();
@@ -16,7 +16,9 @@ class staffModel extends database{
     $db = $this->getDatabase();
     $query = $db->exec('SELECT * FROM users');
     foreach($query as $key => $value){
-      $query[$key]['hid'] = $this->crypteri->encrypt($value['id']);
+      if(isset($value['id'])){
+        $query[$key]['hid'] = $this->crypteri->encrypt($value['id']);
+      }
     }
     return $query;
   }

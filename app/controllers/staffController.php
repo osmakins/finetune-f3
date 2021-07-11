@@ -10,6 +10,7 @@ class staffController extends staffModel{
     if($f3->get('SESSION.user') === NULL){
       $f3->reroute('/login');
     }
+    parent::__construct($f3);
   }
 
   public function showModal($content){
@@ -25,6 +26,7 @@ class staffController extends staffModel{
     $method = $this->f3->get('SERVER.REQUEST_METHOD');
 
     if($method === 'GET'){
+      $this->f3->set('staff', $this->getStaff());
       $this->f3->set('content', 'pages/staff/staff.htm');
       echo \Template::instance()->render('layout.htm');
       exit;

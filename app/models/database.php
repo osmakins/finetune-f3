@@ -9,7 +9,7 @@ class database{
     $this->f3 = $f3;
     $this->crypteri = new twoWayEncrypt($f3->HASH_KEY);
   }
-
+  
   public function getCurrentdate(){
     return date('Y-m-d H:i:s');
   }
