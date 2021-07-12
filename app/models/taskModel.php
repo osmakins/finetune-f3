@@ -26,14 +26,20 @@ class taskModel extends database{
     return $query;
   }
 
+  public function getProjectData(){
+    $this->setDatabase();
+    $query = $this->getDatabase()->exec(
+      'SELECT id, title FROM projects'
+    );
+    return $query;
+  }
+
   public function addTask($dataPack){
     $this->setDatabase();
     $count = $this->getDatabase()->exec(
       'INSERT INTO 
         tasks (title, description, project_id, timeassigned, created_at) 
       VALUES (:title, :description, :project_id, :timeassigned, :created_at)', $dataPack);
-
-    return ($count ? true: false);
   }
 
   public function updateTask($dataSet){

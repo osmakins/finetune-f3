@@ -29,6 +29,21 @@ class taskController extends taskModel{
     }
   }
 
+  public function createTask(){
+    $this->f3->set('project_data', $this->getProjectData());
+    $this->showModal('pages/tasks/task_create.htm');
+
+    $dataPack = [  
+      ':title' => $this->f3->get('POST.title'),
+      ':description' => $this->f3->get('POST.description'),
+      ':timeassigned' => $this->f3->get('POST.timeassigned'),
+      ':project_id' => $this->f3->get('POST.project_id'),
+      ':created_at' => $this->getCurrentdate()
+    ];
+    $this->addTask($dataPack);
+    $this->f3->reroute('/tasks');
+  }
+  
   public function tasks(){
     
   $method = $this->f3->get('SERVER.REQUEST_METHOD');
@@ -48,7 +63,7 @@ class taskController extends taskModel{
         $this->showModal('pages/tasks/task_detail.htm');
         break;
       case 'create':
-        $this->showModal('pages/tasks/task_create.htm');
+        $this->createTask();
         break;
       case 'update':
         $this->showModal('pages/tasks/task_update.htm');
