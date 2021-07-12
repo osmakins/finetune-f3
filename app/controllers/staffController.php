@@ -19,9 +19,9 @@ class staffController extends staffModel{
     if(isset($modal)){
       if(isset($hid)){
         $id = $this->crypteri->decrypt($hid);
-        $projectArray = $this->getStaffById($id);
-        $projectArray["hid"] = $hid;
-        $this->f3->mset($projectArray);
+        $staffArray = $this->getStaffById($id);
+        $staffArray["hid"] = $hid;
+        $this->f3->mset($staffArray);
         echo \Template::instance()->render($content);
         exit;
       }

@@ -9,11 +9,21 @@ class taskController extends taskModel{
     if($f3->get('SESSION.user') === NULL){
       $f3->reroute('/login');
     }
+    parent::__construct($f3);
   }
 
   public function showModal($content){
     $modal = $this->f3->get('POST.modal');
+    $hid = $this->f3->get('POST.id');
     if(isset($modal)){
+      if(isset($hid)){
+        $id = $this->crypteri->decrypt($hid);
+        $taskArray = $this->getTaskById($id);
+        $taskArray["hid"] = $hid;
+        $this->f3->mset($taskArray);
+        echo \Template::instance()->render($content);
+        exit;
+      }
       echo \Template::instance()->render($content);
       exit;
     }

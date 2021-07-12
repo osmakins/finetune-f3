@@ -8,7 +8,9 @@ class taskModel extends database{
 
   public function getTaskById($id){
     $this->setDatabase();
-    $query = $this->getDatabase()->exec('SELECT * FROM tasks WHERE id = :id', [':id' => $id]);
+    $query = $this->getDatabase()->exec('SELECT tasks.*, pro.title as p_title FROM tasks 
+    LEFT JOIN projects as pro ON tasks.project_id = pro.id WHERE tasks.id = :id', [':id' => $id]);
+    //var_dump($query[0]);die;
     return $query[0];
   }
 
@@ -16,6 +18,11 @@ class taskModel extends database{
     $this->setDatabase();
     $db = $this->getDatabase();
     $query = $db->exec('SELECT * FROM tasks');
+    foreach($query as $key => $value){
+      if(isset($value['id'])){
+        $query[$key]['hid'] = $this->crypteri->encrypt($value['id']);
+      }
+    }
     return $query;
   }
 
