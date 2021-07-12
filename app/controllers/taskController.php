@@ -62,8 +62,18 @@ class taskController extends taskModel{
     $this->f3->reroute('/tasks');
   }
 
-  public function tasks(){
+  public function removeTask(){
+    $this->showModal('pages/tasks/task_delete.htm');
     
+    $hid = $this->f3->get('POST.hid');
+    $id = $this->crypteri->decrypt($hid);
+    
+    $this->deleteTask($id);
+    $this->f3->reroute('/tasks');
+  }
+
+  public function tasks(){
+
   $method = $this->f3->get('SERVER.REQUEST_METHOD');
 
     if($method === 'GET'){
@@ -87,7 +97,7 @@ class taskController extends taskModel{
         $this->updateTask();
         break;
       case 'delete':
-        $this->showModal('pages/tasks/task_delete.htm');
+        $this->removeTask();
         break;
       default:
         $this->showModal('pages/error.htm');
