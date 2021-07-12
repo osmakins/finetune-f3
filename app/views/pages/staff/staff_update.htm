@@ -1,20 +1,23 @@
 <form method="POST" action="/staff">
   <div class="mb-3">
-      <input type="text" class="form-control form-control-sm" value="29-07-2020" required>
+    <input type="hidden" name="hid" class="form-control form-control-sm" value="{{ @hid }}" required>
   </div>
   <div class="mb-3">
-      <input type="text" class="form-control form-control-sm" value="Timo Tavastia" required>
+      <input type="text" name="firstname" class="form-control form-control-sm" value="{{ @firstname }}" required>
   </div>
   <div class="mb-3">
-      <input type="email" class="form-control form-control-sm" value="timotavastia@email.com" required>
+    <input type="text" name="lastname" class="form-control form-control-sm" value="{{ @lastname }}" required>
   </div>
   <div class="mb-3">
-      <input type="tel" class="form-control form-control-sm" value="+3584087654321" required>
+      <input type="email" name="email" class="form-control form-control-sm" value="{{ @email }}" required>
   </div>
   <div class="mb-3">
-      <input type="tel" class="form-control form-control-sm" value="Project Manager" required>
+      <input type="tel" name="phone" class="form-control form-control-sm" value="{{ @phone }}" required>
   </div>
   <div class="mb-3">
-      <button type="submit" class="btn btn-sm btn-success btn-block">Update Member</button>
+      <input type="text" name="position" class="form-control form-control-sm" value="{{ @position }}" required>
+  </div>
+  <div class="mb-3">
+      <button type="submit" name="submit" class="btn btn-sm btn-success btn-block" value="update">Update Staff Data</button>
   </div>
 </form>

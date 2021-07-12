@@ -1,9 +1,9 @@
 <?php
 
 class staffModel extends database{
-  // public function __construct($f3){
-  //   parent::__construct($f3);
-  // }
+  public function __construct($f3){
+    parent::__construct($f3);
+  }
 
   public function getStaffById($id){
     $this->setDatabase();
@@ -23,12 +23,16 @@ class staffModel extends database{
     return $query;
   }
 
-  public function addStaff(){
+  public function addStaff($dataPack){
     
   }
 
-  public function updateStaff($id){
-    
+  public function editStaff($dataSet){
+    //var_dump($dataSet); die;
+    $this->setDatabase();
+    $query = $this->getDatabase()->exec('UPDATE users 
+    SET firstname = :firstname, lastname = :lastname, email = :email, phone = :phone, position = :position, updated_at = :updated_at 
+    WHERE id = :id ', $dataSet);
   }
 
   public function deleteStaff($id){

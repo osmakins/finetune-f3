@@ -20,7 +20,7 @@
               <repeat group="{{ @staff }}" key="{{ @key }}" value="{{ @val }}">
               <tr>
                   <td>{{ @val.id }}</td>
-                  <td>{{ @val.username }}</td>
+                  <td>{{ @val.firstname }} {{@val.lastname}}</td>
                   <td>{{ @val.email }}</td>
                   <td><a href="" data-id="{{ @val.hid }}" data-title="Staff Details" data-submit="detail" data-bs-toggle="modal" data-bs-target="#staff_details1" class="staff-modal btn btn-sm btn-block btn-info">Details</a></td>
                   <td><a href="" data-id="{{ @val.hid }}" data-title="Staff Update" data-submit="update" data-bs-toggle="modal" data-bs-target="#staff_edit_details1" class="staff-modal btn btn-sm btn-block btn-warning">Edit</a></td>

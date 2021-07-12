@@ -15,12 +15,39 @@ class staffController extends staffModel{
 
   public function showModal($content){
     $modal = $this->f3->get('POST.modal');
+    $hid = $this->f3->get('POST.id');
     if(isset($modal)){
+      if(isset($hid)){
+        $id = $this->crypteri->decrypt($hid);
+        $projectArray = $this->getStaffById($id);
+        $projectArray["hid"] = $hid;
+        $this->f3->mset($projectArray);
+        echo \Template::instance()->render($content);
+        exit;
+      }
       echo \Template::instance()->render($content);
       exit;
     }
   }
+  public function updateStaff(){
+    $this->showModal('pages/staff/staff_update.htm');
 
+    $hid = $this->f3->get('POST.hid');
+    $id = $this->crypteri->decrypt($hid);
+    $dataSet = [
+      ':id' => $id,
+      ':firstname' => $this->f3->get('POST.firstname'),
+      ':lastname' => $this->f3->get('POST.lastname'),
+      ':email' => $this->f3->get('POST.email'),
+      ':phone' => $this->f3->get('POST.phone'),
+      ':position' => $this->f3->get('POST.position'),
+      ':updated_at' => $this->getCurrentdate()
+    ];
+
+    $this->editStaff($dataSet);
+    $this->f3->reroute('/staff');
+  }
+  
   public function staff(){
 
     $method = $this->f3->get('SERVER.REQUEST_METHOD');
@@ -43,7 +70,7 @@ class staffController extends staffModel{
         $this->showModal('pages/staff/staff_create.htm');
         break;
       case 'update':
-        $this->showModal('pages/staff/staff_update.htm');
+        $this->updateStaff();
         break;
       case 'delete':
         $this->showModal('pages/staff/staff_delete.htm');
