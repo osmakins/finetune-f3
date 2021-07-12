@@ -21,10 +21,10 @@ class taskController extends taskModel{
 
   public function tasks(){
     
-
   $method = $this->f3->get('SERVER.REQUEST_METHOD');
 
     if($method === 'GET'){
+      $this->f3->set('tasks', $this->getTasks());
       $this->f3->set('content', 'pages/tasks/tasks.htm');
       echo \Template::instance()->render('layout.htm');
       exit;

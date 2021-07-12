@@ -16,13 +16,15 @@
                   <th>Edit</th>
                   <th>Complete</th>
               </tr>
+              <repeat group="{{ @tasks }}" key="{{ @key }}" value="{{ @val }}">
               <tr>
-                  <td>1</td>
-                  <td>Design Workflow</td>
-                  <td><a href="" data-id="" data-title="Task Detail" data-submit="detail" data-bs-toggle="modal" data-bs-target="#task_details1" class="task-modal btn btn-sm btn-block btn-info">Details</a></td>
-                  <td><a href="" data-id="" data-title="Update Task" data-submit="update" data-bs-toggle="modal" data-bs-target="#task_edit_details1" class="task-modal btn btn-sm btn-block btn-warning">Edit</a></td>
-                  <td><a href="" data-id="" data-title="Delete Task" data-submit="delete" class="task-modal  btn btn-sm btn-block btn-danger" onclick="confirm('Are you sure you want to remove or archive \' Design WorkFlow Task \'?');">Finish</a></td>
+                  <td>{{ @val.id }}</td>
+                  <td>{{ @val.title }}</td>
+                  <td><a href="" data-id="{{ @val.hid }}" data-title="Task Detail" data-submit="detail" data-bs-toggle="modal" data-bs-target="#task_details1" class="task-modal btn btn-sm btn-block btn-info">Details</a></td>
+                  <td><a href="" data-id="{{ @val.hid }}" data-title="Update Task" data-submit="update" data-bs-toggle="modal" data-bs-target="#task_edit_details1" class="task-modal btn btn-sm btn-block btn-warning">Edit</a></td>
+                  <td><a href="" data-id="{{ @val.hid }}" data-title="Delete Task" data-submit="delete" data-bs-toggle="modal" class="task-modal  btn btn-sm btn-block btn-danger">Finish</a></td>
               </tr>
+            </repeat>
           </table>
       </div>
   </div>
