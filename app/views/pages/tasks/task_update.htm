@@ -1,26 +1,18 @@
 <!-- Edit Task Details -->
 <form method="POST" action="/tasks">
   <div class="mb-3">
-      <input type="text" class="form-control form-control-sm" value="Design WorkFlow" required>
+    <input type="hidden" name="hid" class="form-control form-control-sm" value="{{ @hid }}" required>
+  </div>
+  <div class="mb-3">
+      <input type="text" name="title" class="form-control form-control-sm" value="{{ @title }}" required>
   </div>
   <div class="mb-3">
     <textarea name="description" class="form-control form-control-sm" value="{{ @description }}" required>{{ @description }}</textarea>
   </div>
-  <!-- <div class="mb-3">
-    <select class="form-control form-control-sm">
-        <option selected>Select Project:</option>
-        <option value="Datero Oy Web App">Datero Oy Web App</option>
-        <option value="Account Logs App">Account Logs App</option>
-        <option value="Triple Dots Essential">Triple Dots Essential</option>
-    </select>
-  </div> -->
   <div class="mb-3">
-      <input type="text" class="form-control form-control-sm" value="60 h" required>
+      <input type="text" name="timeassigned" class="form-control form-control-sm" value="{{ @timeassigned }}" required>
   </div>
   <div class="mb-3">
-      <input type="text" class="form-control form-control-sm" value="Datero Oy" required>
-  </div>
-  <div class="mb-3">
-      <button type="submit" class="btn btn-sm btn-success btn-block">Update Task</button>
+      <button type="submit" name="submit" value="update" class="btn btn-sm btn-success btn-block">Update Task</button>
   </div>
 </form>

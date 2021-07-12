@@ -43,7 +43,25 @@ class taskController extends taskModel{
     $this->addTask($dataPack);
     $this->f3->reroute('/tasks');
   }
-  
+
+  public function updateTask(){
+    $this->showModal('pages/tasks/task_update.htm');
+
+    $hid = $this->f3->get('POST.hid');
+    $id = $this->crypteri->decrypt($hid);
+
+    $dataSet = [
+      ':id' => $id,
+      ':title' => $this->f3->get('POST.title'),
+      ':description' => $this->f3->get('POST.description'),
+      ':timeassigned' => $this->f3->get('POST.timeassigned'),
+      ':updated_at' => $this->getCurrentdate()
+    ];
+
+    $this->editTask($dataSet);
+    $this->f3->reroute('/tasks');
+  }
+
   public function tasks(){
     
   $method = $this->f3->get('SERVER.REQUEST_METHOD');
@@ -66,7 +84,7 @@ class taskController extends taskModel{
         $this->createTask();
         break;
       case 'update':
-        $this->showModal('pages/tasks/task_update.htm');
+        $this->updateTask();
         break;
       case 'delete':
         $this->showModal('pages/tasks/task_delete.htm');

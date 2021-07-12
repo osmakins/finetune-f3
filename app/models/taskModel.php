@@ -42,11 +42,11 @@ class taskModel extends database{
       VALUES (:title, :description, :project_id, :timeassigned, :created_at)', $dataPack);
   }
 
-  public function updateTask($dataSet){
+  public function editTask($dataSet){
     $this->setDatabase();
     $query = $this->getDatabase()->exec('UPDATE tasks
-    SET title = :title, description = :description, project_id = :project_id, timeassigned = :timeassigned, updated_at = :updated_at 
-    WHERE id = :id ', $dataSet);
+    SET title = :title, description = :description, timeassigned = :timeassigned, updated_at = :updated_at 
+    WHERE id = :id', $dataSet);
   }
 
   public function deleteTask($id){
