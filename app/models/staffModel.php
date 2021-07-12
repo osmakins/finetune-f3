@@ -24,7 +24,12 @@ class staffModel extends database{
   }
 
   public function addStaff($dataPack){
-    
+    // var_dump($dataPack); die;
+    $this->setDatabase();
+    $count = $this->getDatabase()->exec(
+      'INSERT INTO 
+        users (firstname, lastname, username, password, email, phone, position, created_at) 
+      VALUES (:firstname, :lastname, :username, :password, :email, :phone, :position, :created_at)', $dataPack);
   }
 
   public function editStaff($dataSet){

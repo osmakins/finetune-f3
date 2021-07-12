@@ -29,6 +29,24 @@ class staffController extends staffModel{
       exit;
     }
   }
+
+  public function createStaff(){
+    $this->showModal('pages/staff/staff_create.htm');
+
+    $password = password_hash($this->f3->get('POST.password'), PASSWORD_BCRYPT);
+    $dataPack = [
+      ':username' => $this->f3->get('POST.username'),
+      ':password' => $password,
+      ':firstname' => $this->f3->get('POST.firstname'),
+      ':lastname' => $this->f3->get('POST.lastname'),
+      ':email' => $this->f3->get('POST.email'),
+      ':position' => $this->f3->get('POST.position'),
+      ':phone' => $this->f3->get('POST.phone'),
+      ':created_at' => $this->getCurrentdate()
+    ];
+    $this->f3->reroute('/staff');
+  }
+
   public function updateStaff(){
     $this->showModal('pages/staff/staff_update.htm');
 
@@ -67,7 +85,7 @@ class staffController extends staffModel{
         $this->showModal('pages/staff/staff_detail.htm');
         break;
       case 'create':
-        $this->showModal('pages/staff/staff_create.htm');
+        $this->createStaff();
         break;
       case 'update':
         $this->updateStaff();
