@@ -41,6 +41,7 @@ class staffModel extends database{
   }
 
   public function deleteStaff($id){
-    
+    $this->setDatabase();
+    $query = $this->getDatabase()->exec('DELETE FROM users WHERE id = :id', [':id' => $id]);
   }
 }

@@ -66,6 +66,16 @@ class staffController extends staffModel{
     $this->f3->reroute('/staff');
   }
   
+  public function removeStaff(){
+    $this->showModal('pages/staff/staff_delete.htm');
+    
+    $hid = $this->f3->get('POST.hid');
+    $id = $this->crypteri->decrypt($hid);
+    
+    $this->deleteStaff($id);
+    $this->f3->reroute('/staff');
+  }
+
   public function staff(){
 
     $method = $this->f3->get('SERVER.REQUEST_METHOD');
@@ -91,7 +101,7 @@ class staffController extends staffModel{
         $this->updateStaff();
         break;
       case 'delete':
-        $this->showModal('pages/staff/staff_delete.htm');
+        $this->removeStaff();
         break;
       default:
         $this->showModal('pages/error.htm');
