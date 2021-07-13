@@ -1,5 +1,4 @@
 /vendor
-/lib
 /tmp
 *.env
 *.log

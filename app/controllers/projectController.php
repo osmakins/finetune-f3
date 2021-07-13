@@ -88,11 +88,10 @@ class projectController extends projectModel{
 
   public function projects(){
     $method = $this->f3->get('SERVER.REQUEST_METHOD');
-
     if($method === 'GET'){
-      // $projects = $this->getProjects();
 		  $this->f3->set('projects', $this->getProjects());
       $this->f3->set('content', 'pages/projects/projects.htm');
+      //echo \Template::instance()->extend('pagebrowser', '\Pagination::renderTag');
       echo \Template::instance()->render('layout.htm');
       exit;
     }
