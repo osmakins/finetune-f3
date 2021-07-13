@@ -18,8 +18,10 @@ class projectController extends projectModel{
     if(isset($modal)){
       if(isset($hid)){
         $id = $this->crypteri->decrypt($hid);
+        //var_dump($this->getMilestone($id));die;
         $projectArray = $this->getProjectById($id);
         $projectArray["hid"] = $hid;
+        $projectArray["milestone"] = $this->getMilestone($id);
         $this->f3->mset($projectArray);
         echo \Template::instance()->render($content);
         exit;

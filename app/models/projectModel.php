@@ -40,4 +40,21 @@ class projectModel extends database{
     $this->setDatabase();
     $query = $this->getDatabase()->exec('DELETE FROM projects WHERE id = :id', [':id' => $id]);
   }
+
+  public function getMilestone($id){
+    $this->setDatabase();
+    $query = $this->getDatabase()->exec('SELECT tasks.timeassigned, projects.timetocomplete FROM projects 
+    INNER JOIN tasks ON projects.id = tasks.project_id WHERE projects.id = :id ', [':id' => $id]);
+
+    $totaltimeassigned = 0;
+    $totaltimetocomplete = 0;
+    foreach($query as $key => $value){
+      $totaltimeassigned += $query[$key]['timeassigned'];
+      $totaltimetocomplete = $query[$key]['timetocomplete'];
+    }
+
+    $milestone = round(abs((($totaltimeassigned/$totaltimetocomplete) * 100) - 100));
+
+    return $milestone;
+  }
 }
