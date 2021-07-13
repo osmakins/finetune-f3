@@ -37,6 +37,15 @@ $(document).ready(function(){
         });
     }
 
+    $.ajaxSetup({
+        beforeSend: function(){
+            $('.ajax-loader').show();
+        },
+        complete: function(){
+            $('.ajax-loader').hide();
+        }
+    })
+
     $('.project-modal').on('click', function(){
         let submit = $(this).data('submit');
         let title = $(this).data('title')
