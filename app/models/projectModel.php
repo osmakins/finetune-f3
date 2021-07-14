@@ -11,14 +11,16 @@ class projectModel extends database{
     return $query[0];
   }
 
-  public function getProjects(){
+  public function getProjects($starting, $offset){
     $this->setDatabase();
     $db = $this->getDatabase();
-    $query = $db->exec('SELECT * FROM projects');
+    $query = $db->exec('SELECT * FROM projects ORDER BY id LIMIT :starting, :offset', [':starting' => $starting, ':offset' => $offset]);
     foreach($query as $key => $value){
       $query[$key]['hid'] = $this->crypteri->encrypt($value['id']);
     }
-    return $query;
+    $count = $db->exec('SELECT COUNT(id) AS count FROM projects');
+
+    return ['count' => $count[0]['count'], 'query' => $query];
   }
 
   public function addProject($dataPack){
@@ -52,8 +54,12 @@ class projectModel extends database{
       $totaltimeassigned += $query[$key]['timeassigned'];
       $totaltimetocomplete = $query[$key]['timetocomplete'];
     }
-
-    $milestone = round(abs((($totaltimeassigned/$totaltimetocomplete) * 100) - 100));
+    if($totaltimeassigned === 0 || $totaltimetocomplete === 0){
+      $milestone = 0;
+    }else{
+      $milestone = round(abs((($totaltimeassigned/$totaltimetocomplete) * 100) - 100));
+    }
+    
 
     return $milestone;
   }

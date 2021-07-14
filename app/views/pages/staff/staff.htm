@@ -8,6 +8,10 @@
           </div>
       </div>
       <div class="col-lg-9 col-md-9 xs">
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Search by Staff Name" aria-label="Recipient's username" aria-describedby="button-addon2">
+            <button class="btn btn-outline-secondary" type="button" id="button-addon2">Search</button>
+        </div>
           <table class="table table-striped table-hover bg-light small">
               <tr class="table-dark">
                   <th>ID</th>
@@ -19,7 +23,7 @@
               </tr>
               <repeat group="{{ @staff }}" key="{{ @key }}" value="{{ @val }}">
               <tr>
-                  <td>{{ @val.id }}</td>
+                  <td>{{ @key + 1 }}</td>
                   <td>{{ @val.firstname }} {{@val.lastname}}</td>
                   <td>{{ @val.email }}</td>
                   <td><a href="" data-id="{{ @val.hid }}" data-title="Staff Details" data-submit="detail" data-bs-toggle="modal" data-bs-target="#staff_details1" class="staff-modal btn btn-sm btn-block btn-info">Details</a></td>
@@ -27,22 +31,22 @@
                   <td><a href="" data-id="{{ @val.hid }}" data-title="Delete Staff?" data-submit="delete" data-bs-toggle="modal" class="staff-modal btn btn-sm btn-block btn-danger">Remove</a></td>
               </tr>
             </repeat>
-            <nav aria-label="...">
-                <ul class="pagination">
-                  <li class="page-item disabled">
-                    <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
-                  </li>
-                  <li class="page-item"><a class="page-link" href="#">1</a></li>
-                  <li class="page-item active" aria-current="page">
-                    <a class="page-link" href="#">2</a>
-                  </li>
-                  <li class="page-item"><a class="page-link" href="#">3</a></li>
-                  <li class="page-item">
-                    <a class="page-link" href="#">Next</a>
-                  </li>
-                </ul>
-              </nav>
           </table>
+          <nav aria-label="...">
+            <ul class="pagination">
+              <li class="page-item disabled">
+                <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+              </li>
+              <li class="page-item"><a class="page-link" href="#">1</a></li>
+              <li class="page-item active" aria-current="page">
+                <a class="page-link" href="#">2</a>
+              </li>
+              <li class="page-item"><a class="page-link" href="#">3</a></li>
+              <li class="page-item">
+                <a class="page-link" href="#">Next</a>
+              </li>
+            </ul>
+          </nav>
       </div>
   </div>
 </div>
