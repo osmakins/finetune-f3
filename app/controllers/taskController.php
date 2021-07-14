@@ -77,7 +77,36 @@ class taskController extends taskModel{
   $method = $this->f3->get('SERVER.REQUEST_METHOD');
 
     if($method === 'GET'){
-      $this->f3->set('tasks', $this->getTasks());
+
+      $page = $this->f3->get('GET.page');
+      $page = isset($page)? $page : 1;
+
+      $record_per_page = 5;
+
+      $start_from = ($page - 1) * $record_per_page;
+      
+      $data = $this->getTasks($start_from, $record_per_page);
+      
+      $total_records = $data['count'];
+
+      $total_pages = ceil($total_records/$record_per_page);
+
+      $pages = [];
+      for($i=1; $i <= $total_pages; $i++){
+        $pages[] = $i;
+      }
+
+      $this->f3->set('previous', $page-1);
+      $this->f3->set('next', $page+1);
+      $this->f3->set('totalpages', $total_pages);
+
+      //var_dump($this->getProjects($start_from, $record_per_page));die;
+
+      //var_dump($record_per_page, $start_from, $page);die;
+
+      $this->f3->set('page', $page);
+      $this->f3->set('pages', $pages);
+		  $this->f3->set('tasks', $data['query']);
       $this->f3->set('content', 'pages/tasks/tasks.htm');
       echo \Template::instance()->render('layout.htm');
       exit;

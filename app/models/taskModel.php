@@ -14,16 +14,17 @@ class taskModel extends database{
     return $query[0];
   }
 
-  public function getTasks(){
+  public function getTasks($starting, $offset){
     $this->setDatabase();
     $db = $this->getDatabase();
-    $query = $db->exec('SELECT * FROM tasks');
+
+    $query = $db->exec('SELECT * FROM tasks ORDER BY id LIMIT :starting, :offset', [':starting' => $starting, ':offset' => $offset]);
     foreach($query as $key => $value){
-      if(isset($value['id'])){
-        $query[$key]['hid'] = $this->crypteri->encrypt($value['id']);
-      }
+      $query[$key]['hid'] = $this->crypteri->encrypt($value['id']);
     }
-    return $query;
+    $count = $db->exec('SELECT COUNT(id) AS count FROM tasks');
+
+    return ['count' => $count[0]['count'], 'query' => $query];
   }
 
   public function getProjectData(){

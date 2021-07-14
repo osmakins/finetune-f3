@@ -22,7 +22,7 @@
               </tr>
               <repeat group="{{ @tasks }}" key="{{ @key }}" value="{{ @val }}">
               <tr>
-                  <td>{{ @key + 1 }}</td>
+                  <td>{{ @val.id }}</td>
                   <td>{{ @val.title }}</td>
                   <td><a href="" data-id="{{ @val.hid }}" data-title="Task Detail" data-submit="detail" data-bs-toggle="modal" data-bs-target="#task_details1" class="task-modal btn btn-sm btn-block btn-info">Details</a></td>
                   <td><a href="" data-id="{{ @val.hid }}" data-title="Update Task" data-submit="update" data-bs-toggle="modal" data-bs-target="#task_edit_details1" class="task-modal btn btn-sm btn-block btn-warning">Edit</a></td>
@@ -32,17 +32,40 @@
           </table>
           <nav aria-label="...">
             <ul class="pagination">
-              <li class="page-item disabled">
-                <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
-              </li>
-              <li class="page-item"><a class="page-link" href="#">1</a></li>
-              <li class="page-item active" aria-current="page">
-                <a class="page-link" href="#">2</a>
-              </li>
-              <li class="page-item"><a class="page-link" href="#">3</a></li>
-              <li class="page-item">
-                <a class="page-link" href="#">Next</a>
-              </li>
+             <check if="{{ @page > 1}}">
+               <true>
+                <li class="page-item">
+                  <a class="page-link" href="/projects?page={{ @previous }}">Previous</a>
+                </li>
+               </true>
+               <false>
+                <li class="page-item disabled">
+                  <a class="page-link" href="#">Previous</a>
+                </li>
+               </false>
+             </check>
+              <repeat group="{{ @pages }}" key="{{ @key }}" value="{{ @val }}">
+                <check if="{{ @page == @val}}">
+                  <true>
+                    <li id={{ @val }} class="page-item active"><a class="page-link" href="/tasks?page={{ @val }}">{{ @val }}</a></li>
+                  </true>
+                  <false>
+                    <li id={{ @val }} class="page-item"><a class="page-link" href="/tasks?page={{ @val }}">{{ @val }}</a></li>
+                  </false>
+                </check>
+              </repeat>
+              <check if="{{ @totalpages > @page}}">
+                <true>
+                 <li class="page-item">
+                   <a class="page-link" href="/tasks?page={{ @next }}">Next</a>
+                 </li>
+                </true>
+                <false>
+                 <li class="page-item disabled">
+                   <a class="page-link" href="#">Next</a>
+                 </li>
+                </false>
+              </check>
             </ul>
           </nav>
       </div>
