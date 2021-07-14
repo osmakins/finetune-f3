@@ -11,16 +11,16 @@ class staffModel extends database{
     return $query[0];
   }
 
-  public function getStaff(){
+  public function getStaff($starting, $offset){
     $this->setDatabase();
     $db = $this->getDatabase();
-    $query = $db->exec('SELECT * FROM users');
+    $query = $db->exec('SELECT * FROM users ORDER BY id LIMIT :starting, :offset', [':starting' => $starting, ':offset' => $offset]);
     foreach($query as $key => $value){
-      if(isset($value['id'])){
-        $query[$key]['hid'] = $this->crypteri->encrypt($value['id']);
-      }
+      $query[$key]['hid'] = $this->crypteri->encrypt($value['id']);
     }
-    return $query;
+    $count = $db->exec('SELECT COUNT(id) AS count FROM users');
+
+    return ['count' => $count[0]['count'], 'query' => $query];
   }
 
   public function addStaff($dataPack){

@@ -100,10 +100,6 @@ class taskController extends taskModel{
       $this->f3->set('next', $page+1);
       $this->f3->set('totalpages', $total_pages);
 
-      //var_dump($this->getProjects($start_from, $record_per_page));die;
-
-      //var_dump($record_per_page, $start_from, $page);die;
-
       $this->f3->set('page', $page);
       $this->f3->set('pages', $pages);
 		  $this->f3->set('tasks', $data['query']);
