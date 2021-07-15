@@ -40,6 +40,7 @@ class taskController extends taskModel{
       ':project_id' => $this->f3->get('POST.project_id'),
       ':created_at' => $this->getCurrentdate()
     ];
+
     $this->addTask($dataPack);
     $this->f3->reroute('/tasks');
   }
@@ -77,16 +78,14 @@ class taskController extends taskModel{
   $method = $this->f3->get('SERVER.REQUEST_METHOD');
 
     if($method === 'GET'){
-
       $page = $this->f3->get('GET.page');
+      $search_item = $this->f3->get('GET.search-item');
+
       $page = isset($page)? $page : 1;
 
       $record_per_page = 5;
-
       $start_from = ($page - 1) * $record_per_page;
-      
-      $data = $this->getTasks($start_from, $record_per_page);
-      
+      $data = $this->getTasks($start_from, $record_per_page, $search_item);
       $total_records = $data['count'];
 
       $total_pages = ceil($total_records/$record_per_page);
@@ -99,10 +98,9 @@ class taskController extends taskModel{
       $this->f3->set('previous', $page-1);
       $this->f3->set('next', $page+1);
       $this->f3->set('totalpages', $total_pages);
-
       $this->f3->set('page', $page);
       $this->f3->set('pages', $pages);
-		  $this->f3->set('tasks', $data['query']);
+      $this->f3->set('tasks', $data['query']);
       $this->f3->set('content', 'pages/tasks/tasks.htm');
       echo \Template::instance()->render('layout.htm');
       exit;
