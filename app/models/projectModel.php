@@ -59,8 +59,6 @@ class projectModel extends database{
     }else{
       $milestone = round(abs((($totaltimeassigned/$totaltimetocomplete) * 100) - 100));
     }
-    
-
     return $milestone;
   }
 }
