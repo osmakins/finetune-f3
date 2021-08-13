@@ -8,7 +8,8 @@
   ],
   "description": "Experiment with the fat free php framework",
   "require": {
-    "bcosca/fatfree-core": "^3.7"
+    "bcosca/fatfree-core": "^3.7",
+    "ikkez/f3-cortex": "1.7.1"
   },
   "autoload": {
     "psr-4": {
